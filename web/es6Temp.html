@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="./mock/mock.js"></script>
+    <script src="./mock/mockData.js"></script>
+    <script src="./js/jquery-1.11.2.js"></script>
+    <!-- <script src="http://mockjs.com/dist/mock.js"></script> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      $.ajax({
+        url: "http://127.0.0.1:8080/result",
+        dataType: "json",
+        success: function(data) {
+          let template = `
+                    <ul>
+                    <% for(let cust of data.custs) { %>
+                        <% let {name} = cust %>
+                        <li><%= name %></li>
+                    <% } %>
+                    </ul>
+                `;
+
+            let parse = eval(compile(template));
+            console.log(data)
+            let innerHTML = parse(data);
+            console.log(innerHTML)
+        }
+      });
+
+      function compile(template) {
+        const evalExpr = /<%=(.+?)%>/g;
+        const expr = /<%([\s\S]+?)%>/g;
+
+        template = template
+          .replace(evalExpr, "`); \n  echo( $1 ); \n  echo(`")
+          .replace(expr, "`); \n $1 \n  echo(`");
+
+        template = "echo(`" + template + "`);";
+
+        let script = `(function parse(data){
+            let output = "";
+
+            function echo(html){
+            output += html;
+            }
+
+            ${template}
+
+            return output;
+        })`;
+
+        return script;
+      }
+    </script>
+  </body>
+</html>

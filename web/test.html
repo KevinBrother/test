@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+          var arr = [1,2,3,4,5]
+      /*       var index  = 0
+            let par = new Promise((reslove,reject)=>{
+                for(let i = 0 ; i < arr.length ; i ++){
+                setTimeout(function(){
+                index ++ 
+                    console.log('异步1'); 
+                    if(index == arr.length){
+                        reslove('成功111')
+                    }   
+                },100)
+
+                } 
+            })
+
+            par.then((data)=>{
+                console.log(data,'我应该在异步之前');
+                
+            })     */
+
+            for (let i of arr) {
+                console.log(i)
+            }
+    </script>
+</body>
+</html>

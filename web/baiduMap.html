@@ -1,0 +1,79 @@
+<!DOCTYPE html>  
+<html>
+<head>  
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>Hello, World</title>  
+<style type="text/css">  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}  
+#container{height:100%}  
+</style>  
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=zxKBevQZWIXC125OYqrzsyPxzM4ZXfsa">
+    // http://api.map.baidu.com/geocoder/v2/?address=%E5%8C%97%E4%BA%AC%E5%B8%82%E6%B5%B7%E6%B7%80%E5%8C%BA%E4%B8%8A%E5%9C%B0%E5%8D%81%E8%A1%9710%E5%8F%B7&output=json&ak=zxKBevQZWIXC125OYqrzsyPxzM4ZXfsa&callback=showLocation
+</script>
+<script src="/js/jquery-1.11.2.js"></script>
+
+</head>  
+
+<body>  
+    
+    <script type="text/javascript"> 
+
+var addrArr = [
+"上海市浦东新区亮秀路112号Y1座305室",
+"上海市闵行区金都路5200号",
+"上海市闵行区陈行公路2388号浦江科技广场7号楼10楼",	
+"上海市闵行区中春路1777号",
+"中国（上海）自由贸易试验区世纪大道1600号17楼",	
+"上海市嘉定区澄浏公路63号",		
+"上海市常和路318号",		
+"上海市徐汇区岳阳路76号",
+"西藏北路489号10号楼1-3层"		
+]
+
+var myGeo = new BMap.Geocoder();
+
+function get2L(addr) {
+    let result = {"sta": "", "val": ""};
+    myGeo.getPoint(addr, function(point){
+        if (point) {
+            result.sta = true;
+            result.val = point;
+        }else{
+            result.sta = false;
+            result.val = addr;
+        }
+    });
+    return result;
+};
+
+function abc() {
+    for (let addr of addrArr) {
+        console.log(get2L(addr));
+    }
+}    
+
+abc();
+
+/*
+
+for (let addr of addrArr) {
+
+    url = "http://api.map.baidu.com/geocoder/v2/?address=" + addr + "&output=json&ak=zxKBevQZWIXC125OYqrzsyPxzM4ZXfsa&callback=ret2l"
+
+    jQuery.getScript(url);
+}
+
+function ret2l (data, addr) {
+    console.log(data.result.location, addr);
+
+    let location = data.result.location;
+    let lng = location.lng;
+    let lat = location.lat;
+} */
+    
+
+</script>  
+</body>  
+</html>

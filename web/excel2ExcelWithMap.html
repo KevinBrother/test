@@ -1,0 +1,117 @@
+<!DOCTYPE html>  
+<html>
+<head>  
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>Hello, World</title>  
+<style type="text/css">  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}  
+#container{height:100%}  
+</style>  
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=zxKBevQZWIXC125OYqrzsyPxzM4ZXfsa"></script>
+<script src="/js/jquery-1.11.2.js"></script>
+<script src="js/xlsx.core.min.js"></script>
+<script src="js/xlsx.full.min.js"></script>
+<script src="js/export2Excel.js"></script>
+</head>  
+
+<body>  
+
+<input type="file" name="" id="file" onchange="change(this)">
+
+<script type="text/javascript"> 
+
+
+var aoa = [
+    ['id', '地址', '经度', '纬度']
+];
+
+
+// 读取excel中的的地址
+function change(evn){
+    var name = event.target.files[0].name;//获取上传的文件名
+    var divObj= $(evn).prev()  //获取div的DOM对象
+    $(divObj).html(name) //插入文件名
+    var id = $(evn).attr('id');//获取id
+    var num = id.substr(4,1)
+    var file = event.target.files[0];
+    
+    readWorkbookFromLocalFile(file, function(data){
+        let sheet1 = data.Sheets.sheet1;
+        console.log(sheet1)
+
+        // 所有地址的集合
+        let addrMap= {};
+        let count = 0;
+        for(let idKey in sheet1) {
+            //  console.log(key);
+            // A列 且从A2开始
+            var patt1=new RegExp(/^A([2-9][0-9]*|1[0-9]+)/);
+            if(patt1.test(idKey)) {
+
+                let addrKey = "B" + idKey.substring(1, idKey.length);
+                let id = sheet1[idKey]["v"];
+                // console.log(id)
+                let addr = sheet1[addrKey]["v"];
+                addrMap[id] = addr;
+                count ++
+            }
+        }
+        console.log(addrMap);
+
+        let par = new Promise(function(resolve, reject){
+            // 获取经纬度
+            var myGeo = new BMap.Geocoder();
+            let counted = 0
+            for(let id in addrMap) {
+                let addr = addrMap[id]
+                myGeo.getPoint(addr, function(point){
+                    genExcelData(point, addr, id)
+                    counted++;
+                    console.log(id, counted, count);
+                    if(counted == count) {
+                        resolve();
+                    }
+                });
+            }
+          
+        });
+
+        par.then(function() {
+            console.log("22222" , aoa);
+            // 输出excel
+            var sheet = XLSX.utils.aoa_to_sheet(aoa);
+            openDownloadDialog(sheet2blob(sheet), '经纬度.xlsx');
+        })
+
+    })
+
+}
+
+
+// 生成excel需要的数据
+function genExcelData(point, addr, id) {
+    if(point) {
+        aoa.push([id, addr, point.lng, point.lat]); 
+    }else {
+        aoa.push([id, addr]);
+    }
+}
+
+
+//导出
+
+/* var aoa = [
+    ['主要信息', null, null, '其它信息'], // 特别注意合并的地方后面预留2个null
+    ['姓名', '性别', '年龄', '注册时间'],
+    ['张三', '男', 18, new Date()],
+    ['李四', '女', 22, new Date()]
+];
+var sheet = XLSX.utils.aoa_to_sheet(aoa);
+openDownloadDialog(sheet2blob(sheet), '单元格合并示例.xlsx'); */
+
+
+</script>  
+</body>  
+</html>

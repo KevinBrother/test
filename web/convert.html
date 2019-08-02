@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-1.11.2.js"></script>
+</head>
+<body>
+    <form action="https://api.cloudconvert.com/convert" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="hidden" name="apikey" value="OA70YztS8zIzC47Yhmpz6SJ4ZoGi1WwiLxCPm0SUTuEdjAu5dstXF8W2veZ9ZB6u">
+        <input type="hidden" name="inputformat" value="webm">
+        <input type="hidden" name="outputformat" value="gif">
+        <input type="hidden" name="input" value="upload">
+        <input type="hidden" name="filename" value="overName.webm">
+        <input type="hidden" name="callback" value="callback">
+        <input type="hidden" name="wait" value="true">
+        <input type="hidden" name="download" value="inline">
+        <input type="submit" value="Convert!">
+    </form>
+    <script>
+        function convert() {
+            $.ajax({
+                url: "https://api.cloudconvert.com/v1/convert",
+                type: 'post',
+                data: {
+                    "apikey": "OA70YztS8zIzC47Yhmpz6SJ4ZoGi1WwiLxCPm0SUTuEdjAu5dstXF8W2veZ9ZB6u",
+                    "inputformat": "webm",
+                    "outputformat": "gif",
+                    "input": "upload",
+                    "filename": "overName.webm",
+                    "callback": "callback",
+                    "wait": true,
+                    "download": "inline"
+                },
+                success: data => {
+                    console.log("succ-------",data)
+                },
+                error: data => {
+                    console.log("err-------",data)
+                }
+            })
+        }
+    
+    </script>
+</body>
+</html>
