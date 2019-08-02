@@ -13,9 +13,11 @@
       <input type="text" name="" id="" v-model="detail.id" />
       <button-counter></button-counter>
       <button1></button1>
-      <comtest :detail='detail' :msg="msg"></comtest>
+      <p2son :detail='detail' :msg="msg"></p2son>
+      <son2p v-on:get_son="showMgFromSon" ></son2p>
     </div>
-    <script src="/web/component/comTest.js"></script>
+    <script src="/web/component/p2son.js"></script>
+    <script src="/web/component/son2p.js"></script>
     <script>
       Vue.component("button-counter", {
         data: function() {
@@ -23,8 +25,13 @@
             count: 0
           };
         },
-        template:
-          '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+        template:`
+            <div>
+                <button v-on:click="count++">You clicked me {{ count }}   times.</button>
+                <a href="https://www.cnblogs.com/amunamuna/p/8872979.html">tiaoya</a>
+            </div>
+        `,
+          
       });
 
       var a =  '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
@@ -42,11 +49,16 @@
       new Vue({
         el: "#app",
         data: {
-            msg: '这个是msssssssssssssssssssssss', 
+            msg: '这是来自父组件的消息啊', 
           detail: {
               id: 1,
               name: 'hehe'
           }
+        },
+        methods: {
+            showMgFromSon: function(data){
+                alert(data)
+            }
         }
       });
     </script>
