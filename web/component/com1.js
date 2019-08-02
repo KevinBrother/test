@@ -1,0 +1,1 @@
+var com1 = '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
