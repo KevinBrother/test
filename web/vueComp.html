@@ -13,9 +13,9 @@
       <input type="text" name="" id="" v-model="detail.id" />
       <button-counter></button-counter>
       <button1></button1>
-      <comp1></comp1>
+      <comtest :detail='detail' :msg="msg"></comtest>
     </div>
-    <script src="/web/component/com1.js"></script>
+    <script src="/web/component/comTest.js"></script>
     <script>
       Vue.component("button-counter", {
         data: function() {
@@ -39,20 +39,14 @@
           a
       });
 
-      Vue.component("comp1", {
-        data: function() {
-          return {
-            count: 0
-          };
-        },
-        template:
-        com1
-      });
-
       new Vue({
         el: "#app",
         data: {
-          detail: {}
+            msg: '这个是msssssssssssssssssssssss', 
+          detail: {
+              id: 1,
+              name: 'hehe'
+          }
         }
       });
     </script>
