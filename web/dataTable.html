@@ -43,66 +43,81 @@
   <script>
     var columns = [
       {
-        data: "name",
+        data: "name"
       },
       {
-        data: "age",
+        data: "age"
       },
       {
         data: null,
         render: function(data, type, full) {
-          var html = "<button type='button'>点我</button>"
-          return html
+          var html = "<button type='button'>点我</button>";
+          return html;
         }
       }
     ];
 
     $(document).ready(function() {
-        var table = $("#table_id_example").DataTable({
-            // data: tabledata,
-            // colReorder: {
-            //   fixedColumnsLeft: 1
-            // },
-            columns: columns,
-            pagingType: "full_numbers",
-            language: {
-            url: "datatable/datatables_language.json"
+      var table = $("#table_id_example").DataTable({
+        // data: tabledata,
+        // colReorder: {
+        //   fixedColumnsLeft: 1
+        // },
+        columns: columns,
+        pagingType: "full_numbers",
+        language: {
+          url: "datatable/datatables_language.json"
+        },
+        ajax: function(data, callback, setting) {
+          console.log('data', data)
+          console.log('setting', setting)
+          let opt = "";
+          let url = "http://127.0.0.1:8080/result";
+
+          var rData = {};
+          getAjax(
+            opt,
+            url,
+            function(data) {
+              rData.recordsTotal = data.total;
+              rData.recordsFiltered = data.total;
+              rData.data = data.custs;
+            //   console.log(rData);
             },
-            ajax: function(data, callback, setting) {
-                let opt = ''
-                let url = 'http://127.0.0.1:8080/result'
-
-
-                var rData = {};
-                getAjax(opt, url, function(data){
-                    rData.recordsTotal = data.total
-                    rData.recordsFiltered = data.total
-                    rData.data = data.custs
-                    console.log(rData)
-                },function(){
-                    callback(rData)
-                })
+            function() {
+              callback(rData);
             }
-        });
+          );
+        }
+      });
 
-    $('#table_id_example tbody').on('click', 'tr button', function(){
-        let data = table.cell($(this).parent()).data()
-        console.log(data)
-    })
-    })
+      
+      $("#table_id_example tbody").on("click", "tr button", function() {
+        let data = table.cell($(this).parent()).data();
+        // console.log(data);
+      });
+
+
+      $("#table_id_example").on("page.dt", function() {
+        let info = table.page.info()
+        // console.log(info);
+      });
+
+
+
+    });
     function getAjax(opt, url, succ, callback) {
-
       $.ajax({
-          url: url,
-          dataType:'json',
-          success:function(data){
-            succ(data)
-          }
-      }).then(function(){
-            if(callback !== null && callback instanceof Function) {
-                callback()
-            }
-      })
+        url: url,
+        dataType: "json",
+        success: function(data) {
+          succ(data);
+        }
+      }).then(function() {
+        if (callback !== null && callback instanceof Function) {
+          callback();
+        }
+      });
     }
   </script>
 </html>
@@ -120,4 +135,4 @@
     "scrollX": true,	// X轴宽度,超过滚动
     "scrollXInner": "120%", // 强制dataTables宽度需要更长,强制滚动
 });
-列隐藏和显示 --> 
+列隐藏和显示 -->

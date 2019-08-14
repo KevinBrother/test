@@ -12,8 +12,13 @@
     <div id="app">
       <input type="text" name="" id="" v-model="detail.id" />
       <button-counter></button-counter>
-      <button1></button1>
-      <p2son :detail='detail' :msg="msg"></p2son>
+      <button1></button1><br/>
+      +++++++++++++++++++++++++++++<br/>
+      <div>
+      <p2son :detail='detail' :msg="sss" :name='detail.name'></p2son>
+      </div>
+      ----------------------------<br/>
+      <div>{{msg}}</div>
       <son2p v-on:get_son="showMgFromSon" ></son2p>
     </div>
     <script src="/web/component/p2son.js"></script>
@@ -49,7 +54,7 @@
       new Vue({
         el: "#app",
         data: {
-            msg: '这是来自父组件的消息啊', 
+            sss: '这是来自父组件的消息啊', 
           detail: {
               id: 1,
               name: 'hehe'

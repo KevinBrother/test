@@ -14,7 +14,6 @@ Vue.component("son2p", {
     template: son2p,
     methods: {
       send2pt: function() {
-        alert('son')
         this.$emit("get_son", this.msg)
       }
     }
