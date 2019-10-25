@@ -13,9 +13,15 @@
       <input type="text" name="" id="" v-model="detail.id" />
       <button-counter></button-counter>
       <button1></button1><br/>
+      <div>
+          <p>Original message is: {{ message }}</p>
+          <input type="input" v-model="message"/>
+          <p>Computed reversed message:: {{ reversedMessage }}</p>
+        </div>
       +++++++++++++++++++++++++++++<br/>
       <div>
       <p2son :detail='detail' :msg="sss" :name='detail.name'></p2son>
+      <p v-if='ifTest'>v-if测试</p>
       </div>
       ----------------------------<br/>
       <div>{{msg}}</div>
@@ -44,7 +50,8 @@
       Vue.component("button1", {
         data: function() {
           return {
-            count: 0
+            count: 0,
+            
           };
         },
         template:
@@ -55,9 +62,17 @@
         el: "#app",
         data: {
             sss: '这是来自父组件的消息啊', 
-          detail: {
-              id: 1,
-              name: 'hehe'
+            ifTest: 1==1,
+            msg: 111,
+            message: 'hellow',
+            detail: {
+                id: 1,
+                name: 'hehe'
+            }
+        },
+        computed:{
+          reversedMessage(){
+              return this.message.split('').reverse().join('')
           }
         },
         methods: {

@@ -1,0 +1,106 @@
+/* 移动的div */
+.move {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    position:relative;
+    animation: mymove 3s infinite;
+    /* -webkit-animation:mymove 3s infinite; */
+}
+
+
+/*button样式*/
+.btnDiv{
+    text-align: center;
+}
+.openPopUpBtn,.closePopUpBtn{
+    width:60px;
+    height:40px;
+    line-height:40px;
+    border:1px solid #c9c9c9;
+    background-color: #FFF;
+    box-shadow: 1px 1px 1px 1px #eee;
+}
+.openPopUpBtn{
+    margin-top:50px;
+}
+.openPopUpBtn:hover,.closePopUpBtn:hover{
+    background-color: #eee;
+    cursor:pointer;
+}
+
+/*弹框样式*/
+.popUp{
+    width:300px;
+    height:200px;
+    text-align: center;
+    background-color: #FFFeee;
+    border:1px solid #ccc;
+    box-shadow: 1px 1px 1px 1px #eee;            
+    position:absolute;
+    left:60%;
+    margin-left:-300px;
+    opacity: 0; /* 透明度为0 */
+}
+
+.closePopUpBtn{
+    position: absolute;
+    bottom:20px;
+    left:50%;
+    transform:translate(-50%);
+}
+
+
+/* 动画 */
+
+@keyframes mymove {
+    from {left: 0px;}
+    to {left: 200px;}
+}
+
+
+#showCont {
+    animation: showUp 1s;
+    animation-fill-mode: forwards;
+}
+
+#hiddenCont {
+    animation: hidepop 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showUp{
+    0%{
+        opacity: 0;
+        top:-60%;
+        transform: rotateZ(0deg);
+    }
+    50%{
+        transform: rotateZ(10deg)
+    }
+    100%{
+        opacity: 1;
+        top:40%;
+        transform: rotateZ(0deg);
+    }
+}
+
+@keyframes hidepop{
+    0%{
+        opacity: 1;
+        top:40%;
+        transform: rotateZ(0deg);
+    }
+    50%{
+        transform: rotateZ(-10deg)
+    }
+    100%{
+        opacity: 1;
+        top:-60%;
+        transform: rotateZ(0deg);
+    }
+}
+
+
+
+

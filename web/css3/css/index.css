@@ -1,0 +1,37 @@
+.sanjiao {
+  width: 0;
+  height: 0;
+  border: 40px solid;
+  border-color: red orange white black;
+}
+
+.easycenter {
+  border: 1px solid red;
+  height: 40px;
+  width: 40px;
+
+  margin: 0 auto;
+}
+
+.floatcenter {
+  border: 1px solid red;
+  width: 200px;
+  height: 100px;
+  float: left;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -50px 0 0 -100px;
+}
+
+.absolutecenter {
+    border: 1px solid red;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}

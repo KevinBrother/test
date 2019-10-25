@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/web/js/jquery-1.11.2.js"></script>
+</head>
+<body>
+    <input type="file" name="file" id="file" onchange="upload('file')"/>
+    <script>
+        function upload(fileId){
+            var file = $("#" + fileId)[0].files[0];
+            var form = new FormData();
+            // form.append('name', '张三')
+            form.append("file", file)
+
+            $.ajax({
+                type: 'post',
+                url: '#',
+                data: form,
+                dataType:'json',
+                processData:false,
+                contentType:false,
+                success: function(res){
+                    console.log(res)
+                }
+            })
+        }
+    </script>
+</body>
+</html>
