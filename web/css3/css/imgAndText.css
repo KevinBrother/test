@@ -84,13 +84,18 @@ a {
 
 .text-desc {
     background-color: #fff;
-    opacity: 0.9;
+    opacity: 0;
     text-align: center;
     padding: 45px 20px 20px;
+    width: 100%;
     height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-.part-1, .part-2 {
+.part-1, .part-2, .part-3 {
     position: relative;
     overflow: hidden;
 }
@@ -104,9 +109,9 @@ a {
 }
 
 .part-1 .text-desc {
-    position: absolute;
     top: -100%;
     transition: 0.5s;
+    opacity: 0.9;
 } 
 
 .part-1.effect-1:hover .text-desc{
@@ -139,18 +144,112 @@ a {
     padding: 45px 20px 20px;
 }
 
-.part-2.effect-1 .img-box {
-    transition: 0.5s;
+.part-2 {
+    perspective: 800px;
 }
 
-.part-2.effect-1 .img-box:hover {
+.part-2 .img-box {
+    transition: 0.4s;
+}
+
+.part-2 .text-desc {
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+
+.part-2:hover .img-box{
     transform: rotateX(80deg);
-    position: absolute;
+    transform-origin: center bottom 0;
+}
+
+.part-2.effect-1:hover .text-desc {
+    opacity: 1;
+}
+
+.part-2.effect-2 .text-desc {
+    top: -100%;
+    opacity: 1;
+    transition: 0.6s;
+}
+
+.part-2.effect-2:hover .text-desc {
+    top: 0;
+}
+
+.part-2.effect-3 .text-desc {
+    top: auto;
+    bottom: -100%;
+    opacity: 1;
+    transition: 0.6s;
+}
+
+.part-2.effect-3:hover .text-desc {
     bottom: 0;
 }
 
-.part-2.effect-1 .text-desc {
-    position: absolute;
-    top: 0;
+
+/* part3 */
+.part-3 {
+    perspective: 500px;
+}
+
+.part-3.effect-1 .img-box {
+    transition: 0.6s;
+}
+
+.part-3.effect-1:hover .img-box {
+    opacity: 0;
+    transform: scale(1.2);
+}
+
+.part-3.effect-1 .text-desc {
     z-index: -1;
+    opacity: 1;
+    transform: rotateX(80deg);
+    transform-origin: center top 0;
+    transition: 0.6s;
+}
+
+.part-3.effect-1:hover .text-desc {
+    transform: none;
+}
+
+.part-3.effect-2 .img-box {
+    transition: 0.6s;
+}
+
+.part-3.effect-2:hover .img-box{
+    transform: translateY(-100%)
+}
+
+.part-3.effect-2 .text-desc {
+    transform: rotateX(80deg);
+    transform-origin: center bottom 0;
+    transition: 0.6s;
+}
+
+.part-3.effect-2:hover .text-desc {
+    opacity: 1;
+    transform: none;
+}
+
+.part-3.effect-3 .img-box {
+    transition: 0.6s;
+}
+
+.part-3.effect-3:hover .img-box{
+    transform: translateY(100%)
+}
+
+.part-3.effect-3 .text-desc {
+    z-index: -1;
+    opacity: 1;
+    transform: rotateX(-80deg);
+    transform-origin: center top 0;
+    transition: 0.6s;
+}
+
+.part-3.effect-3:hover .text-desc {
+    transform: none;
 }

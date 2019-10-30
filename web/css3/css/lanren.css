@@ -98,7 +98,7 @@ p{font-weight: 300; line-height: 20px; font-size: 14px; margin-bottom: 15px;}
 .port-5.effect-1:hover .text-desc{transform: translateX(0px); opacity: 1;}
 
 .port-5.effect-2{z-index: 10;}
-.port-5.effect-2 img{transition: 0.5s; transform: none);}
+.port-5.effect-2 img{transition: 0.5s; transform: none;}
 .port-5.effect-2:hover img{transform: scale(0.5) translateY(100%); position: relative; z-index: 9; border: 6px solid rgba(255, 255, 255, 0.9);}
 .port-5.effect-2 .text-desc{transform: translateY(-100%); opacity: 0; padding: 20px; transition: 0.5s;}
 .port-5.effect-2:hover .text-desc{transform: translateY(0px); opacity: 1;}
