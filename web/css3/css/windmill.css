@@ -1,0 +1,46 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.main {
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  position: absolute;
+  width: 530px;
+  height: 530px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+ul li:nth-child(1) {
+  animation: li 5s linear infinite;
+}
+
+ul li:nth-child(2) {
+  animation: li 5s linear reverse infinite;
+}
+
+ul li:nth-child(3) {
+  animation: li 5s linear infinite;
+}
+
+@keyframes li {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

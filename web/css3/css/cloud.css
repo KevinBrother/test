@@ -1,59 +1,61 @@
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 .sky {
-    height: 480px;
-    background: #007fd5;
-    position: relative;
-    overflow: hidden;
-    animation: sky_backgroud 50s infinite;
+  height: 480px;
+  background: #007fd5;
+  position: relative;
+  overflow: hidden;
+  animation: sky_backgroud 50s infinite;
 }
 
-.clouds_one, .clouds_two, .clouds_three {
-    height: 100%;
-    width: 300%;
-    position: absolute;
-    left: 0;
-    top: 0;
+.clouds_one,
+.clouds_two,
+.clouds_three {
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .clouds_one {
-    background: url("../images/cloud_one.png");
-    animation: clouds_one 50s infinite;  
+  background: url('../images/cloud_one.png');
+  animation: clouds_one 50s infinite;
 }
 
 .clouds_two {
-    background: url("../images/cloud_two.png");
-    animation: clouds_one 75s infinite;  
+  background: url('../images/cloud_two.png');
+  animation: clouds_one 75s infinite;
 }
 
 .clouds_three {
-    background: url("../images/cloud_three.png");
-    animation: clouds_one 100s infinite;  
+  background: url('../images/cloud_three.png');
+  animation: clouds_one 100s infinite;
 }
 
 @keyframes sky_backgroud {
-    from {
-        background: #007fd5;
-    }
-    50% {
-        background: black;
-    }
-    to {
-        background: #007fd5;
-    }
+  from {
+    background: #007fd5;
+  }
+  50% {
+    background: black;
+  }
+  to {
+    background: #007fd5;
+  }
 }
 
 @keyframes clouds_one {
-    from {
-        left: 0;
-    }
-    to {
-        left: -200%;
-    }
+  from {
+    left: 0;
+  }
+  to {
+    left: -200%;
+  }
 }
-
 
 /* 
 .clouds_two {
