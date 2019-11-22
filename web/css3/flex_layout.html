@@ -24,6 +24,36 @@
             background-color: aqua
         }
 
+        nav {
+            width: 80%;
+            height: 100%;
+            margin: 0 auto;
+            background-color: burlywood;
+            display: flex;
+        }
+
+        ul {
+            list-style: none;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        ul li {
+            margin: 0 5px;
+        }
+
+        ul:first-child {
+            margin-right: auto;
+        }
+
+        ul:last-child li {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: brown;
+        }
+
         main {
             flex-grow: 1;
             background-color: blue;
@@ -37,7 +67,18 @@
 </head>
 
 <body>
-    <header></header>
+    <header>
+        <nav>
+            <ul>
+                <li>首页</li>
+                <li>主功能</li>
+                <li>关于</li>
+            </ul>
+            <ul>
+                <li></li>
+            </ul>
+        </nav>
+    </header>
     <main></main>
     <footer></footer>
 </body>
