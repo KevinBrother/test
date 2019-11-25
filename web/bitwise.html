@@ -12,15 +12,37 @@
     <script>
         // 递归
 
+        // 汉诺塔
+        /*         function hannoi(level, A, B, C) {
+                    debugger;
+                    if (level == 1) {
+                        console.log(`from ${A} 移动 ${level} to ${C}`);
+                        return;
+                    } else {
+                        hannoi(level - 1, A, C, B);
+                        console.log(`from ${A} 移动 ${level} to ${C}`);
+                        hannoi(level - 1, B, A, C);
+                    }
+                } */
+
+
+        // 阶乘
+        function jc(n) {
+            debugger;
+            if (n == 1)
+                return 1;
+            return n * jc(n - 1);
+        }
+
 
         // 裴波那切
-        // function fei(n) {
-        //     debugger
-        //     if (n <= 0) return 0;
-        //     if (n <= 2) return 1;
-        //     return fei(n - 1) + fei(n - 2)
+        function fei(n) {
+            debugger
+            if (n <= 0) return 0;
+            if (n <= 2) return 1;
+            return fei(n - 1) + fei(n - 2)
 
-        // }
+        }
 
 
         /* 
