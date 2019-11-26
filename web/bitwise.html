@@ -26,6 +26,57 @@
                 } */
 
 
+        function charu(arr) {
+            var len = arr.length;
+            for (var i = 0; i < len; i++) {
+                var minIndex = i;
+                var min = arr[minIndex];
+                for (var j = i + 1; j > 0; j--) {
+                    if (arr[j] < arr[minIndex]) {
+                        arr[1]
+                        temp = j;
+                        min = arr[j];
+                    }
+                }
+            }
+        }
+
+        function xuanze(arr) {
+            var len = arr.length;
+            debugger
+            for (var i = 0; i < len; i++) {
+                var minIndex = i;
+                for (j = i + 1; j < len; j++) {
+                    if (arr[j] < arr[minIndex]) {
+                        minIndex = j;
+                    }
+                }
+
+                if (minIndex != i) {
+                    var temp;
+                    temp = arr[minIndex];
+                    arr[minIndex] = arr[i];
+                    arr[i] = temp;
+                }
+            }
+            return arr;
+        }
+
+        function maopao(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                debugger
+                for (var j = 0; j < arr.length - i; j++) {
+                    var temp;
+                    if (arr[j] > arr[j + 1]) {
+                        temp = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
         // 阶乘
         function jc(n) {
             debugger;
