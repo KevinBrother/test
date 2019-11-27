@@ -28,17 +28,28 @@
 
         function charu(arr) {
             var len = arr.length;
-            for (var i = 0; i < len; i++) {
-                var minIndex = i;
-                var min = arr[minIndex];
-                for (var j = i + 1; j > 0; j--) {
-                    if (arr[j] < arr[minIndex]) {
-                        arr[1]
-                        temp = j;
-                        min = arr[j];
-                    }
+            debugger
+            for (var i = 1; i < len; i++) {
+                var min = arr[i];
+                var curIndex = i;
+                /*  for (var j = i - 1; j >= 0; j--) {
+                     if (min < arr[j]) {
+                         arr[j + 1] = arr[j];
+                         curIndex--;
+                     } else {
+                         break
+                     }
+                 }
+                 arr[curIndex] = min; */
+
+                while (min < arr[curIndex - 1]) {
+                    arr[curIndex] = arr[curIndex - 1];
+                    curIndex--;
                 }
+
+                arr[curIndex] = min;
             }
+            return arr;
         }
 
         function xuanze(arr) {
