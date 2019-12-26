@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #header,
+        #footer {
+            height: 30px;
+            background-color: gray;
+        }
+
+        .up,
+        .down {
+            width: 200px;
+            background: pink;
+        }
+
+        #content {
+            padding: 0 200px;
+        }
+
+        .up {
+            position: relative;
+            left: -200px;
+            float: left;
+            margin-left: -100%;
+        }
+
+        .down {
+            position: relative;
+            right: -200px;
+            float: left;
+            margin-left: -200px;
+        }
+
+        .middle {
+            width: 100%;
+            float: left;
+            background: yellow;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <header>header</header> -->
+    <div id="header">header</div>
+    <div id="content" class="clearfix">
+        <div class="middle">
+            upup</br>
+            upup</br>
+            upup</br>
+            upup</br>
+            upup</br>
+            upup</br>
+
+            <h1>如果需要左右两侧等高，可以用伪等高布局</h1>
+            upup</br>
+            upup</br>
+            upup</br>
+            upup</br>
+            upup</br>
+            upup</br>
+            upup</br>
+            upup</br>
+        </div>
+        <div class="up">
+            up
+        </div>
+        <div class="down">down</div>
+    </div>
+    <div id="footer">footer</div>
+    <!-- <footer>footer</footer> -->
+</body>
+
+</html>
