@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #wrap {
+            width: 400px;
+            height: 400px;
+            background-color: pink;
+            margin: 0 auto;
+            text-align: center;
+
+            display: table;
+        }
+
+        /* 
+        display: table使块状元素成为一个块级表格;
+        display: table-cell;子元素设置成表格单元格;
+        vertical-align: middle;使表格内容居中显示，即可实现垂直居中的效果; */
+
+        #wrap .inner {
+            display: table-cell;
+            vertical-align: middle;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <span class="inner">
+            asdfasdfaasdfasdfasdfasdssaddf <br />
+            asdfasdfaasdfasdfasdfasdssaddf <br />
+            asdfasdfaasdfasdfasdfasdssaddf <br />
+            asdfasdfaasdfasdfasdfasdssaddf <br />
+            asdfasdfaasdfasdfasdfasdssaddf <br />
+        </span>
+    </div>
+</body>
+
+</html>

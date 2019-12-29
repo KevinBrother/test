@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #wrap {
+            border: 1px solid black;
+        }
+
+        .inner {
+            width: 200px;
+            height: 200px;
+            background: pink;
+            float: left;
+        }
+
+        /*    1、给父元素直接加高度
+        #wrap {
+            height: 200px;
+        } */
+        /* 
+        2、开启BFC
+        #wrap {
+            overflow: hidden;
+        } */
+
+        /* 5、伪元素 兼容ie6、7 */
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clearfix::after {
+            contain: "";
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="wrap" class="clearfix">
+        <div class="inner"></div>
+        <!-- 
+            3、br标签
+            <br clear="all" /> 
+        -->
+        <!-- 4、控标签
+        <div style="clear: both"></div> -->
+    </div>
+</body>
+
+</html>
