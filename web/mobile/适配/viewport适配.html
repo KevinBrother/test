@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Document</title>
+    <style>
+        div {
+            width: 320px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        test
+    </div>
+</body>
+<script>
+    // viewport适配原理：没一个元素在不同设备上占据的CSS像素的个数是一样的，但是CSS像素和物理像素的比例是不一样的，而且是等比的。
+    // 优点： 没有破坏完美视口。
+    // 缺点： px值到rem的转换太复杂
+    (function () {
+        var targetW = 640;
+        var scale = document.documentElement.clientWidth / targetW;
+        var meta = document.querySelector("meta[name='viewport']");
+        meta.content = "initial-scale=" + scale + ", minimum-scale=" + scale + ",maximum-scale=" + scale +
+            ",user-scalable=no"
+    })()
+</script>
+
+</html>

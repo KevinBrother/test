@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 16rem;
+            height: 1px;
+            margin-top: 3rem;
+            background: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+    </div>
+</body>
+<script>
+    // rem适配原理：改变了一个元素在不同设备上占据的CSS像素的个数。
+    // 优点： 没有破坏完美视口。
+    // 缺点： px值到rem的转换太复杂
+    (function () {
+        var dpr = window.devicePixelRatio || 1;
+        var styleNode = document.createElement("style");
+        var w = document.documentElement.clientWidth * dpr / 16;
+        styleNode.innerHTML = "html{font-size: " + w + "px!important;}";
+        document.head.appendChild(styleNode);
+
+        var scale = 1 / dpr;
+        var meta = document.querySelector("meta[name='viewport']");
+        meta.content = "width=device-width, inital-scale=" + scale;
+    })()
+</script>
+
+</html>
