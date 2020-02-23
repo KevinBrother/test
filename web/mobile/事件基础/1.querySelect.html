@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 40px;
+            height: 40px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</body>
+<script>
+    /*    window.onload = function () {
+        var itemNodes = document.getElementsByClassName("item");
+        document.body.innerHTML += "<div class='item'></div>";
+        for (let i = 0; i < itemNodes.length; i++) {
+            itemNodes[i].style.background = "pink";
+        }
+    } */
+    window.onload = function () {
+        var itemNodes = document.querySelectorAll(".item");
+        document.body.innerHTML += "<div class='item'></div>";
+        // querySelectorAll 是静态获取。
+        itemNodes = document.querySelectorAll(".item");
+        for (let i = 0; i < itemNodes.length; i++) {
+            itemNodes[i].style.background = "pink";
+        }
+    }
+</script>
+
+</html>

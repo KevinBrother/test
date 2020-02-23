@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrap {
+            width: 400px;
+            height: 400px;
+            background-color: pink;
+        }
+
+        #inner {
+            width: 200px;
+            height: 200px;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="inner"></div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        document.oncontextmenu = function () {
+            return false;
+        }
+
+        let wrap = document.querySelector("#wrap");
+        let inner = document.querySelector("#inner");
+
+        wrap.oncontextmenu = function (e) {
+            e = e || event;
+            e.stopPropagation();
+        }
+
+        inner.oncontextmenu = function () {
+            return false;
+        }
+    }
+</script>
+
+</html>

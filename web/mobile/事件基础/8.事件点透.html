@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            position: absolute;
+            width: 200px;
+            height: 150px;
+            border: 1px solid;
+            background-color: pink;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item" id="item">
+    </div>
+    <a href="http://www.baidu.com">去百度把</a>
+</body>
+<script>
+    window.onload = function () {
+
+        /*   1、PC端事件可以在移动端触发
+          2、PC端事件有300毫秒延迟 （为了留给判断是否双击）
+          3、移动端事件不会有延迟 */
+        var item = document.querySelector("#item")
+        // item.addEventListener("touchstart", function () {
+        // 触发touchstart, 立马隐藏，然后触发click ，跳转了
+        item.addEventListener("click", function () {
+            // 触发touchstart，但是300毫秒后才触发click，然后隐藏，所以点不透
+            this.style.display = "none";
+
+        })
+    }
+</script>
+
+</html>

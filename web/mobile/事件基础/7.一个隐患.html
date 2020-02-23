@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 200px;
+            height: 150px;
+            border: 1px solid;
+            background-color: pink;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item" id="item">
+        itmeTestasdfasdfasdfASasdfadsfa
+    </div>
+</body>
+<script>
+    /* 
+    适配步骤：
+    1. meta标签
+    2. 全面阻止事件的默认行为
+        隐患：页面上所有的滚动条失效(真机)
+        -----> 自定义更牛逼的滚动条
+    3. 一个适配方案 
+    */
+
+    window.onload = function () {
+        document.addEventListener("touchstart", function (e) {
+            e = e || window.event;
+            e.preventDefault();
+        })
+    }
+</script>
+
+</html>

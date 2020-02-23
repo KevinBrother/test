@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            width: 250px;
+            height: 250px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item" id="item">
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        document.addEventListener("touchstart", function (e) {
+            e = e || window.event;
+            e.preventDefault();
+        })
+
+        // 移动端事件列表和PC的不一样（有三个手指对象列表）
+        var item = document.querySelector(".item");
+        item.addEventListener("touchend", function (e) {
+            e = e || window.event;
+            var item = document.querySelector(".item");
+            item.innerHTML = "changed: " + e.changedTouches.length + "<br/>"
+            item.innerHTML += "target: " + e.targetTouches.length + "<br/>"
+            item.innerHTML += "touches: " + e.touches.length + "<br/>"
+            console.log(e)
+        })
+
+    }
+</script>
+
+</html>

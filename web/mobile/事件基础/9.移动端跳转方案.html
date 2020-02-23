@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <a href="http://www.baidu.com">去百度把</a>
+    <a href="http://www.baidu.com">去百度把</a>
+</body>
+<script>
+    window.onload = function () {
+
+        document.addEventListener("touchstart", function (e) {
+            e = e || window.event;
+            e.preventDefault();
+        })
+
+        // 移动端跳转方案，解决误触（触屏划过也会触发end事件）
+        var aNodes = document.querySelectorAll("a");
+        for (let i = 0; i < aNodes.length; i++) {
+            aNodes[i].addEventListener("touchstart", function () {
+                this.isMove = false;
+            })
+
+            aNodes[i].addEventListener("touchmove", function () {
+                this.isMove = true;
+            })
+            aNodes[i].addEventListener("touchend", function () {
+                if (!this.isMove) {
+                    location.href = this.href;
+                }
+            })
+
+
+        }
+    }
+</script>
+
+</html>

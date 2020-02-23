@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 340px;
+            height: 340px;
+            border: 1px solid;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item" id="item">
+        itmeTest
+    </div>
+</body>
+<script>
+    // 静止 document上的触屏开始事件。chrome模拟机上无效，只能支持具体元素的。但是真机是有效的
+    window.onload = function () {
+        document.addEventListener("touchstart", function (e) {
+            e = e || window.event;
+            e.preventDefault();
+        })
+
+        /*   document.addEventListener("touchstart", function (e) {
+              let item = document.querySelector(".item");
+              item.addEventListener("touchstart", function (e) {
+
+                  console.log("-----item---元素", e.cancelable);
+                  e = e || window.event;
+                  e.preventDefault();
+              }) 
+
+              e = e || window.event;
+              e.preventDefault();
+          }) */
+
+    }
+</script>
+
+</html>

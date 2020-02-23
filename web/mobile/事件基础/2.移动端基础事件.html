@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 340px;
+            height: 340px;
+            border: 1px solid;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item">
+        触屏的三个事件
+    </div>
+</body>
+<script>
+    window.onload = function () {
+
+        var item = document.querySelector(".item");
+        item.addEventListener("touchstart", function () {
+            console.log("touchstart")
+        })
+
+        item.addEventListener("touchmove", function () {
+            console.log("touchmove")
+        })
+
+        item.addEventListener("touchend", function () {
+            console.log("touchend")
+        })
+
+        /*    
+        // 低版本on事件不支持，改为增加监听事件
+           item.ontouchstart = function () {
+               console.log("touchstart")
+           } */
+    }
+</script>
+
+</html>
