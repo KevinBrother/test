@@ -25,9 +25,6 @@
     </div>
 </body>
 <script>
-    // rem适配原理：改变了一个元素在不同设备上占据的CSS像素的个数。
-    // 优点： 没有破坏完美视口。
-    // 缺点： px值到rem的转换太复杂
     (function () {
         var dpr = window.devicePixelRatio || 1;
         var styleNode = document.createElement("style");
