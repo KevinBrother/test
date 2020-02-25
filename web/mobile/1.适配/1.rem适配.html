@@ -7,6 +7,10 @@
         content="width=device-width,height=device-height, initial-scale=1.0, user-scalable=no, minimum-scale=1.0,maximum-scale=1.0, target-densitydpi=device-dpi">
     <title>Document</title>
     <style>
+        html {
+            font-size: 16;
+        }
+
         div {
             width: 8rem;
             height: 8rem;
@@ -24,6 +28,7 @@
     // rem适配原理：改变了一个元素在不同设备上占据的CSS像素的个数。
     // 优点： 没有破坏完美视口。
     // 缺点： px值到rem的转换太复杂
+    // 原理： 改变一个元素在不同设备上的css像素的个数。
     (function () {
         var styleNode = document.createElement("style");
         var w = document.documentElement.clientWidth / 16;

@@ -21,8 +21,9 @@
 </body>
 <script>
     // viewport适配原理：没一个元素在不同设备上占据的CSS像素的个数是一样的，但是CSS像素和物理像素的比例是不一样的，而且是等比的。
-    // 优点： CSS像素和设计稿尺寸1：1。
+    // 优点： 布局视口的宽度置为设计稿的宽度。
     // 缺点： 破坏了完美视口
+    // 原理： 改变不同设备上一个CSS像素跟物理像素的比例。
     (function () {
         var targetW = 640;
         var scale = document.documentElement.clientWidth / targetW;
