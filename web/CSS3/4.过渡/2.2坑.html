@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .wrap {
+            height: 60%;
+            border: 1px solid;
+            margin: 100px 200px;
+        }
+
+        .test {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: pink;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+
+            transition-property: width;
+            transition-duration: 2s;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="test"></div>
+    </div>
+</body>
+<script>
+    // transition在元素首次渲染还没有结束的情况下，改变样式是不会触发的。
+    var test = document.querySelector(".test");
+    test.style.width = "200px";
+    // alert(1);
+</script>
+
+</html>
