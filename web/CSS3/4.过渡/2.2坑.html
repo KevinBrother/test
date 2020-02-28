@@ -44,6 +44,7 @@
 </body>
 <script>
     // transition在元素首次渲染还没有结束的情况下，改变样式是不会触发的。
+    // transform 参数的个数和顺序的变换会使动画失效。
     var test = document.querySelector(".test");
     test.style.width = "200px";
     // alert(1);
