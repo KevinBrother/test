@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+
+            width: 400px;
+            height: 300px;
+            border: 1px solid;
+
+            display: flex;
+
+            /* 控制主轴和侧轴分别是哪一跟 默认水平 horizontal */
+            flex-direction: row;
+
+            /* 
+            flex-start: 富裕空间在主轴的正方向
+            flex-end： 富裕空间在主轴的反反向 
+            center 富裕空间在主轴两边
+            space-between 富裕空间在项目之间
+            space-around 富裕空间在项目两边
+            */
+            /* 主轴的富裕空间 */
+            justify-content: space-around;
+
+
+            /* 
+            flex-start: 富裕空间在侧轴的正方向
+            flex-end： 富裕空间在侧轴的反反向 
+            center 富裕空间在侧轴两边
+            baseline （box没有的）按基线对齐
+            stretch （box没有的）等高布局 （元素需要没有高度）
+            */
+            /* 侧轴的富裕空间 */
+            align-items: stretch;
+        }
+
+        #wrap div {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+</body>
+
+</html>
