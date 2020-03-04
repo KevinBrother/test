@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+
+            width: 100px;
+            height: 300px;
+            border: 1px solid;
+
+            display: flex;
+            /* flex-direction: row; */
+            justify-content: flex-start;
+            align-items: flex-start;
+
+
+            /* 控制侧轴方向 */
+            /* flex-wrap: wrap-reverse; */
+
+            /* 多行多列时，富裕空间的管理,会把所有行、列看成一个整体 */
+            align-content: flex-end;
+
+            /* flex-direction和flex-wrap的简写 */
+            flex-flow: row wrap-reverse;
+
+        }
+
+        #wrap div {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            text-align: center;
+            line-height: 50px;
+
+            /* 
+                弹性空间管理
+                将主轴上的富裕空间按比例分配到项目的width上
+                拉伸因子
+             */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+</body>
+
+</html>

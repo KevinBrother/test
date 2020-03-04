@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* 
+            flex-wrap: nowrap
+            box-shrink 默认值为1
+
+            flex-basis：伸缩基准值，默认是元素主轴的值（widht或者height）
+            flex-grow:
+                可用空间=（容器大小 - 所有相邻项目flex-basis的总和）
+                            400 - 5* 50 = 150
+                可扩展空间 = （可用空间 / 所有相邻项目 flex-grow的总和）
+                            150 / 10 = 15
+                每项伸缩大小 = （flex-basis + （可扩展空间 * flex-grow的值））
+                            50 + 15 * 6 = 140
+        */
+
+        #wrap {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+
+            width: 400px;
+            height: 300px;
+            border: 1px solid;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            flex-flow: row wrap;
+
+        }
+
+        #wrap>div {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            text-align: center;
+            line-height: 50px;
+            flex-grow: 1;
+        }
+
+        #wrap>div:nth-child(1) {
+            flex-grow: 6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+</body>
+
+</html>
