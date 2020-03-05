@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .wrap {
+            width: 100px;
+            height: 100px;
+            margin: 100px auto;
+            border: 1px solid;
+        }
+
+        /* 
+
+            width: 浏览器窗口的尺寸（min max）
+            min-width:800px   >=800px 起作用
+            max-width:800px   <=800px 起作用
+
+            device-width: 设配独立像素(min max)
+            device-width: 414px
+                        pc端：分辨率
+                        移动端： 看具体机型的参数
+
+            device-pixel-ratio: 像素比 必须加上-webkit前缀
+            -webkit-device-pixel-ratio: 3  ：像素比为3的
+                        pc端：1
+                        移动端：看具体机型的参数
+            
+            orientation: 横竖屏
+            orientation:landscape ：匹配横屏
+                    landscape： 横屏
+                    portrait： 竖屏
+         */
+
+        @media screen and (orientation: landscape) {
+
+            /* 规则 */
+            .wrap {
+                border: 10px solid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+    </div>
+</body>
+
+</html>
