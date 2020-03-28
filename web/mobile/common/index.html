@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-1.11.2.js"></script>
+    <style>
+        .contant {
+            min-width: 320px;
+            max-width: 640px;
+            width: 100%;
+            margin: 0 auto;
+            background: blanchedalmond;
+            height: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header"></header>
+    <div class="contant">
+    </div>
+
+    <script>
+        $(function () {
+            $("#header").load("/header.html");
+        })
+    </script>
+</body>
+
+</html>
