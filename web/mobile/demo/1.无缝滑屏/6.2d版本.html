@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html body {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #wrap {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel-wrap {
+        position: relative;
+    }
+
+    ul.list {
+        list-style: none;
+        overflow: hidden;
+        position: absolute;
+        /* transition: 1s left; */
+    }
+
+    ul.list li {
+        float: left;
+    }
+
+    ul.list li img {
+        width: 100%;
+        display: block;
+    }
+
+    .point-wrap {
+        position: absolute;
+        left: 50%;
+        top: 90%;
+        transform: translate3d(-50%, -50%, 0);
+        z-index: 1;
+    }
+
+    .point-wrap ul {
+        list-style: none;
+    }
+
+    .point-wrap ul li {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        background-color: #f3edee82;
+        float: left;
+        margin-left: 5px;
+    }
+
+    .point-wrap ul li.active {
+        background-color: #2196f3;
+    }
+</style>
+
+<body>
+    <div id="wrap">
+        <div class="carousel-wrap">
+            <div class="point-wrap">
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    window.onload = function () {
+        document.addEventListener('touchStart', function (ev) {
+            ev = ev || event;
+            ev.preventDefault();
+        })
+
+        let imgArr = ['./img/1.jpg', './img/2.jpg', './img/3.jpg', './img/4.jpg', './img/5.jpg']
+
+        carouselLayout(imgArr);
+
+        /** 布局
+         * @description: 根据图片动态布局，包括ul宽度的百分比，每个 li 的宽度百分比
+         * @param {type} ： imgArr  图片数组
+         */
+        function carouselLayout(imgArr) {
+            let carouselWrap = document.querySelector('.carousel-wrap');
+
+            if (carouselWrap) {
+
+                let ulNode = document.createElement('ul');
+                // ulNode.setAttribute('class', 'list');
+                ulNode.classList.add('list');
+
+                let styleNode = document.createElement('style');
+                styleNode.innerHTML = `.carousel-wrap > ul.list {width: ${imgArr.length * 100}%;}
+                                   .carousel-wrap > ul.list li {width: ${1 / imgArr.length * 100}%;}`
+
+                for (let img of imgArr) {
+                    ulNode.innerHTML += `<li>
+                                    <img src="${img}" alt="">
+                                </li>`
+                }
+                carouselWrap.appendChild(ulNode);
+                document.head.appendChild(styleNode);
+
+                let imgNode = document.querySelector(".carousel-wrap ul.list li img");
+                setTimeout(() => {
+                    carouselWrap.style.height = imgNode.offsetHeight + 'px';
+                }, 100);
+
+                let pointWrap = document.querySelector('.carousel-wrap > .point-wrap');
+                if (pointWrap) {
+                    let pUlNode = document.createElement('ul');
+                    for (let img of imgArr) {
+                        pUlNode.innerHTML += `<li> </li>`
+                    }
+                    pUlNode.firstChild.classList.add("active");
+                    pointWrap.appendChild(pUlNode);
+                }
+            }
+
+        }
+        carouselAction();
+        /** 滑屏
+         * @description: 手指滑动屏幕，图片元素也跟着滑动
+         *              1.拿到元素一开始的位置
+         *              2.拿到手指一开始的位置
+         *              3.拿到手指移动的距离
+         *              4.元素滑动手指一动的距离
+         */
+        function carouselAction() {
+            let startX = 0; //手指一开始的位置
+            let elementX = 0; //手指一开始的位置
+            let movedX = 0; // 手指移动的距离
+            let translateX = 0; // 元素偏移量，替代offsetLeft
+            let carouselWrap = document.querySelector('.carousel-wrap');
+            let ulNode = document.querySelector('.carousel-wrap ul.list');
+
+            carouselWrap.addEventListener('touchstart', function (ev) {
+                ev = ev || event;
+                let touchC = ev.changedTouches[0]; // changedTouches 获取的是多个手指，只取第一个手指
+                /*   console.log('----------------first figure----------------', ev.changedTouches[0]);
+                  console.log('----------------ulNode----------------', ulNode); */
+                ulNode.style.transition = 'none';
+                startX = touchC.clientX;
+                elementX = translateX;
+            })
+            carouselWrap.addEventListener('touchmove', function (ev) {
+                ev = ev || event;
+                let touchC = ev.changedTouches[0];
+                let nowX = touchC.clientX;
+                // console.log(nowX);
+
+                movedX = nowX - startX;
+                // console.log('----------------movedX----------------', movedX);
+
+                // 元素移动手指移动的距离
+                // ulNode.style.left = elementX + movedX + 'px';
+                translateX = elementX + movedX;
+                console.log(translateX);
+                ulNode.style.transform = `translateX('${translateX}px')`;
+            })
+            carouselWrap.addEventListener('touchend', function (ev) {
+                ev = ev || event;
+
+                // let index = ulNode.offsetLeft / document.documentElement.clientWidth;
+                let index = translateX / document.documentElement.clientWidth;
+                index = Math.round(index);
+                // console.log('round', index);
+
+                if (index > 0) { // 右滑加载最后一屏
+                    index = 0;
+                } else if (index < 1 - imgArr.length) { // 左滑最后一屏加载第一屏
+                    index = 1 - imgArr.length;
+                }
+
+                ulNode.style.transition = '.3s left';
+                // ulNode.style.left = index * (document.documentElement.clientWidth) + 'px';
+                translateX = index * (document.documentElement.clientWidth);
+                console.log(translateX);
+                ulNode.style.transform = `translateX('${translateX}px')`;
+
+                let pointWrap = document.querySelector('.carousel-wrap > .point-wrap');
+                if (pointWrap) {
+                    // console.log('-------pointWrap--------', pointWrap);
+                    let pUlNode = pointWrap.children[0];
+                    for (let li of [].slice.call(pUlNode.children)) {
+                        // console.log(li);
+                        li.classList.remove('active');
+                    }
+                    pUlNode.children[Math.abs(index)].classList.add('active');
+                }
+            })
+        }
+
+    }
+</script>
+
+</html>

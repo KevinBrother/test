@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html body {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #wrap {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    ul.list {
+        list-style: none;
+        overflow: hidden;
+        position: absolute;
+    }
+
+    ul.list li {
+        float: left;
+    }
+
+    ul.list li img {
+        width: 100%;
+        display: block;
+    }
+</style>
+
+<body>
+    <div id="wrap">
+        <div class="carousel-wrap"></div>
+    </div>
+</body>
+
+<script>
+    window.onload = function () {
+        document.addEventListener('touchStart', function (ev) {
+            ev = ev || event;
+            ev.preventDefault();
+        })
+
+        let imgArr = ['./img/1.jpg', './img/2.jpg', './img/3.jpg', './img/4.jpg', './img/5.jpg']
+
+        carouselLayout(imgArr);
+
+        /** 布局
+         * @description: 根据图片动态布局，包括ul宽度的百分比，每个 li 的宽度百分比
+         * @param {type} ： imgArr  图片数组
+         */
+        function carouselLayout(imgArr) {
+            let carouselWrap = document.querySelector('.carousel-wrap');
+            let ulNode = document.createElement('ul');
+            // ulNode.setAttribute('class', 'list');
+            let styleNode = document.createElement('style');
+            styleNode.innerHTML = `.carousel-wrap > ul.list {width: ${imgArr.length * 100}%;}
+                                   .carousel-wrap > ul.list li {width: ${1 / imgArr.length * 100}%;}`
+
+            ulNode.classList.add('list');
+            for (let img of imgArr) {
+                ulNode.innerHTML += `<li>
+                                    <img src="${img}" alt="">
+                                </li>`
+            }
+            carouselWrap.appendChild(ulNode);
+            document.head.appendChild(styleNode);
+            let imgNode = document.querySelector(".carousel-wrap ul.list li img");
+            setTimeout(() => {
+                carouselWrap.style.height = imgNode.offsetHeight + 'px';
+            }, 100);
+
+        }
+        carouselAction();
+        /** 滑屏
+         * @description: 手指滑动屏幕，图片元素也跟着滑动
+         *              1.拿到元素一开始的位置
+         *              2.拿到手指一开始的位置
+         *              3.拿到手指移动的距离
+         *              4.元素滑动手指一动的距离
+         */
+        function carouselAction() {
+            let startX = 0; //手指一开始的位置
+            let elementX = 0; //手指一开始的位置
+            let movedX = 0; // 手指移动的距离
+            let index = 0; // 图片数组的下标
+            let carouselWrap = document.querySelector('.carousel-wrap');
+            let ulNode = document.querySelector('.carousel-wrap ul.list');
+
+            carouselWrap.addEventListener('touchstart', function (ev) {
+                ev = ev || event;
+                let touchC = ev.changedTouches[0]; // changedTouches 获取的是多个手指，只取第一个手指
+                /*   console.log('----------------first figure----------------', ev.changedTouches[0]);
+                  console.log('----------------ulNode----------------', ulNode); */
+                startX = touchC.clientX;
+                elementX = ulNode.offsetLeft;
+            })
+            carouselWrap.addEventListener('touchmove', function (ev) {
+                ev = ev || event;
+                let touchC = ev.changedTouches[0];
+                let nowX = touchC.clientX;
+                console.log(nowX);
+
+                movedX = nowX - startX;
+                // console.log('----------------movedX----------------', movedX);
+
+                // 元素移动手指移动的距离
+                ulNode.style.left = elementX + movedX + 'px';
+            })
+            carouselWrap.addEventListener('touchend', function (ev) {
+                ev = ev || event;
+                // 大于零向右滑动，展示左边的图片
+                if (movedX > 0) {
+                    // console.log('==>');
+                    index--;
+                } else if (movedX < 0) {
+                    // console.log('<==');
+                    index++;
+                }
+                ulNode.style.left = -index * (document.documentElement.clientWidth) + 'px';
+            })
+        }
+
+    }
+</script>
+
+</html>
