@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./js/carousel.css">
+    <script src="./js/transform.js"></script>
+    <script src="./js/carousel.js"></script>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html body {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #wrap {
+        width: 100%;
+        overflow: hidden;
+    }
+</style>
+
+
+<body>
+    <div id="wrap">
+        <div class="carousel-wrap" needCarousel needAuto>
+            <div class="point-wrap">
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    window.onload = function () {
+        document.addEventListener('touchStart', function (ev) {
+            ev = ev || event;
+            ev.preventDefault();
+        })
+
+        let imgArr = ['./img/1.jpg', './img/2.jpg', './img/3.jpg', './img/4.jpg', './img/5.jpg']
+        carousel(imgArr)
+    }
+</script>
+
+</html>

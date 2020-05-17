@@ -1,0 +1,45 @@
+.carousel-wrap {
+    position: relative;
+}
+
+ul.list {
+    list-style: none;
+    overflow: hidden;
+    position: absolute;
+    /* transition: 1s left; */
+}
+
+ul.list li {
+    float: left;
+}
+
+ul.list li img {
+    width: 100%;
+    display: block;
+}
+
+.point-wrap {
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate3d(-50%, -50%, 0);
+    z-index: 1;
+}
+
+.point-wrap ul {
+    list-style: none;
+}
+
+.point-wrap ul li {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #f3edee82;
+    float: left;
+    margin-left: 5px;
+}
+
+.point-wrap ul li.active {
+    background-color: #2196f3;
+}

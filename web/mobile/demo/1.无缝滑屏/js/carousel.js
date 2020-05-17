@@ -1,111 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./js/transform.js"></script>
-</head>
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-    }
-
-    html body {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    #wrap {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .carousel-wrap {
-        position: relative;
-    }
-
-    ul.list {
-        list-style: none;
-        overflow: hidden;
-        position: absolute;
-        /* transition: 1s left; */
-    }
-
-    ul.list li {
-        float: left;
-    }
-
-    ul.list li img {
-        width: 100%;
-        display: block;
-    }
-
-    .point-wrap {
-        position: absolute;
-        left: 50%;
-        top: 90%;
-        transform: translate3d(-50%, -50%, 0);
-        z-index: 1;
-    }
-
-    .point-wrap ul {
-        list-style: none;
-    }
-
-    .point-wrap ul li {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        cursor: pointer;
-        background-color: #f3edee82;
-        float: left;
-        margin-left: 5px;
-    }
-
-    .point-wrap ul li.active {
-        background-color: #2196f3;
-    }
-</style>
-
-<body>
-    <div id="wrap">
-        <div class="carousel-wrap" needCarousel>
+!(function (w) {
+    /**
+     * @description: 图片轮播图
+     * 
+     * 
+     * // html 
+     *  <div class="carousel-wrap" needCarousel needAuto>
             <div class="point-wrap">
             </div>
         </div>
-    </div>
-</body>
 
-<script>
-    window.onload = function () {
-        document.addEventListener('touchStart', function (ev) {
-            ev = ev || event;
-            ev.preventDefault();
-        })
+        // css
+        <link rel="stylesheet" href="./js/carousel.css">
+     * 
+     * @param {type} imgArr 图片数组
+     * @param {type} needCarousel html指令 是否需要无缝轮播
+     * @param {type} needAuto html指令 是否需要自动轮播
+     */
 
-        let imgArr = ['./img/1.jpg', './img/2.jpg', './img/3.jpg', './img/4.jpg', './img/5.jpg']
+    function carousel (imgArr) {
         let pointeLength = imgArr.length;
-        // imgArr = imgArr.concat(imgArr);
+        let autoIndex = 0;
+        let carouselWrap = document.querySelector('.carousel-wrap');
+
+        imgArr = imgArr.concat(imgArr);
         carouselLayout(imgArr);
 
         /** 布局
          * @description: 根据图片动态布局，包括ul宽度的百分比，每个 li 的宽度百分比
          * @param {type} ： imgArr  图片数组
          */
-        function carouselLayout(imgArr) {
-            let carouselWrap = document.querySelector('.carousel-wrap');
+        function carouselLayout (imgArr) {
 
             if (carouselWrap) {
 
                 needCarousel = carouselWrap.getAttribute('needCarousel');
                 needCarousel = needCarousel == null ? false : true;
                 if (needCarousel) {
-                    imgArr = imgArr.concat(imgArr);
+                    // imgArr = imgArr.concat(imgArr);
                 }
-                // console.log('----------------imgarr-----------', imgArr.length);
+                console.log('----------------imgarr-----------', imgArr.length);
 
                 let ulNode = document.createElement('ul');
                 // ulNode.setAttribute('class', 'list');
@@ -113,12 +46,12 @@
 
                 let styleNode = document.createElement('style');
                 styleNode.innerHTML = `.carousel-wrap > ul.list {width: ${imgArr.length * 100}%;}
-                                   .carousel-wrap > ul.list li {width: ${1 / imgArr.length * 100}%;}`
+                               .carousel-wrap > ul.list li {width: ${1 / imgArr.length * 100}%;}`
 
                 for (let img of imgArr) {
                     ulNode.innerHTML += `<li>
-                                    <img src="${img}" alt="">
-                                </li>`
+                                <img src="${img}" alt="">
+                            </li>`
                 }
                 carouselWrap.appendChild(ulNode);
                 document.head.appendChild(styleNode);
@@ -150,7 +83,7 @@
          *              3.拿到手指移动的距离
          *              4.元素滑动手指一动的距离
          */
-        function carouselAction(imgArr, needCarousel) {
+        function carouselAction (imgArr, needCarousel) {
             let startX = 0; //手指一开始的位置
             let elementX = 0; //元素一开始的位置
             let movedX = 0; // 手指移动的距离
@@ -171,7 +104,8 @@
                         点击第二组的最后一张瞬间跳到第一组的最后一张
                     */
                     // index 代表ul的位置
-                    let index = transformCss(ulNode, 'translateX') / document.documentElement.clientWidth;
+                    let index = transformCss(ulNode, 'translateX') / document.documentElement
+                        .clientWidth;
                     // console.log('---------------index------------', index);
                     if (-index === 0) {
                         index = -pointeLength;
@@ -186,8 +120,10 @@
                 startX = touchC.clientX;
                 elementX = transformCss(ulNode, 'translateX');
                 // console.log('-----start----', transformCss(ulNode, 'translateX'));
-            })
 
+                // 清除定时器
+                clearInterval(timer);
+            })
             carouselWrap.addEventListener('touchmove', function (ev) {
                 ev = ev || event;
                 let touchC = ev.changedTouches[0];
@@ -204,31 +140,22 @@
                 ev = ev || event;
 
                 // let index = ulNode.offsetLeft / document.documentElement.clientWidth;
-                let index = transformCss(ulNode, 'translateX') / document.documentElement.clientWidth;
-                index = Math.round(index);
-                // console.log('round', index);
+                autoIndex = transformCss(ulNode, 'translateX') / document.documentElement.clientWidth;
+                autoIndex = Math.round(autoIndex);
+                // console.log('round', autoIndex);
                 // console.log('end imgArr.length', imgArr.length);
 
-                if (index > 0) { // 右滑加载最后一屏
-                    index = 0;
-                } else if (index < 1 - imgArr.length) { // 左滑最后一屏加载第一屏
-                    index = 1 - imgArr.length;
+                if (autoIndex > 0) { // 右滑加载最后一屏
+                    autoIndex = 0;
+                } else if (autoIndex < 1 - imgArr.length) { // 左滑最后一屏加载第一屏
+                    autoIndex = 1 - imgArr.length;
                 }
 
-                let pointWrap = document.querySelector('.carousel-wrap > .point-wrap');
-                if (pointWrap) {
-                    // console.log('-------pointWrap--------', pointWrap);
-                    let pUlNode = pointWrap.children[0];
-                    for (let li of [].slice.call(pUlNode.children)) {
-                        // console.log(li);
-                        li.classList.remove('active');
-                    }
-                    pUlNode.children[Math.abs(index % pointeLength)].classList.add('active');
-                }
-
+                point(autoIndex);
+                auto(autoIndex);
                 ulNode.style.transition = '.3s transform';
-                // ulNode.style.left = index * (document.documentElement.clientWidth) + 'px';
-                ulNode.style.transform = transformCss(ulNode, 'translateX', index * (document
+                // ulNode.style.left = autoIndex * (document.documentElement.clientWidth) + 'px';
+                ulNode.style.transform = transformCss(ulNode, 'translateX', autoIndex * (document
                     .documentElement.clientWidth))
                 // ulNode.style.transform = 'translateX(' + translateX + 'px)';
                 // console.log('-----end----', transformCss(ulNode, 'translateX'));
@@ -236,7 +163,57 @@
             })
         }
 
-    }
-</script>
 
-</html>
+
+
+        let timer = 0; // 自动轮播
+
+        let needAuto = carouselWrap.getAttribute('needAuto');
+
+        needAuto = needAuto == null ? false : true;
+        if (needAuto) {
+            // imgArr = imgArr.concat(imgArr);
+        }
+
+        auto(autoIndex)
+        /** 自动轮播
+         * @description: 设置定时器自动轮播 
+         * @param {type} 
+         */
+        function auto (index) {
+            clearInterval(timer)
+            timer = setInterval(function () {
+                let ulNode = document.querySelector('.carousel-wrap ul.list');
+
+                if (index == 1 - imgArr.length) {
+                    ulNode.style.transition = 'none';
+                    index = 1 - imgArr.length / 2;
+                    transformCss(ulNode, 'translateX', index * document.documentElement.clientWidth);
+                }
+                setTimeout(() => {
+                    index--;
+                    // console.log('---------autoFlag index------', index);
+                    point(index);
+                    ulNode.style.transition = '1s transform';
+                    transformCss(ulNode, 'translateX', index * document.documentElement
+                        .clientWidth);
+                }, 50);
+            }, 3000) // 轮播一张需要的时间
+        }
+
+        function point (index) {
+            let pointWrap = document.querySelector('.carousel-wrap > .point-wrap');
+            if (pointWrap) {
+                let pUlNode = pointWrap.children[0];
+                // console.log('-------pointWrap--------', pointWrap);
+                for (let li of [].slice.call(pUlNode.children)) {
+                    // console.log(li);
+                    li.classList.remove('active');
+                }
+                pUlNode.children[Math.abs(index % pointeLength)].classList.add('active');
+            }
+        }
+    };
+
+    w.carousel = carousel;
+})(window)
