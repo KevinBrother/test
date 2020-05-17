@@ -72,7 +72,7 @@
 
 <body>
     <div id="wrap">
-        <div class="carousel-wrap">
+        <div class="carousel-wrap" needCarousel>
             <div class="point-wrap">
             </div>
         </div>
@@ -99,7 +99,12 @@
             let carouselWrap = document.querySelector('.carousel-wrap');
 
             if (carouselWrap) {
-                imgArr = imgArr.concat(imgArr);
+
+                needCarousel = carouselWrap.getAttribute('needCarousel');
+                needCarousel = needCarousel == null ? false : true;
+                if (needCarousel) {
+                    imgArr = imgArr.concat(imgArr);
+                }
                 console.log('----------------imgarr-----------', imgArr.length);
 
                 let ulNode = document.createElement('ul');
@@ -133,7 +138,7 @@
                     pointWrap.appendChild(pUlNode);
                 }
 
-                carouselAction(imgArr);
+                carouselAction(imgArr, needCarousel);
             }
 
         }
@@ -145,7 +150,7 @@
          *              3.拿到手指移动的距离
          *              4.元素滑动手指一动的距离
          */
-        function carouselAction(imgArr) {
+        function carouselAction(imgArr, needCarousel) {
             let startX = 0; //手指一开始的位置
             let elementX = 0; //元素一开始的位置
             let movedX = 0; // 手指移动的距离
@@ -158,27 +163,31 @@
                 let touchC = ev.changedTouches[0]; // changedTouches 获取的是多个手指，只取第一个手指
                 ulNode.style.transition = 'none';
 
-                // 无缝
-                /* 
-                    点击第一组的第一张瞬间跳到第二组的第一张
-                    点击第二组的最后一张瞬间跳到第一组的最后一张
-                */
-                // index 代表ul的位置
-                let index = transformCss(ulNode, 'translateX') / document.documentElement.clientWidth;
-                // console.log('---------------index------------', index);
-                if (-index === 0) {
-                    index = -pointeLength;
-                    // console.log('---------------index == 0 ------------', index);
-                } else if (-index == (imgArr.length - 1)) {
-                    index = -(pointeLength - 1)
+
+                if (needCarousel) {
+                    // 无缝
+                    /* 
+                        点击第一组的第一张瞬间跳到第二组的第一张
+                        点击第二组的最后一张瞬间跳到第一组的最后一张
+                    */
+                    // index 代表ul的位置
+                    let index = transformCss(ulNode, 'translateX') / document.documentElement.clientWidth;
+                    // console.log('---------------index------------', index);
+                    if (-index === 0) {
+                        index = -pointeLength;
+                        // console.log('---------------index == 0 ------------', index);
+                    } else if (-index == (imgArr.length - 1)) {
+                        index = -(pointeLength - 1)
+                    }
+                    transformCss(ulNode, 'translateX', index * (document
+                        .documentElement.clientWidth))
                 }
-                transformCss(ulNode, 'translateX', index * (document
-                    .documentElement.clientWidth))
 
                 startX = touchC.clientX;
                 elementX = transformCss(ulNode, 'translateX');
                 // console.log('-----start----', transformCss(ulNode, 'translateX'));
             })
+
             carouselWrap.addEventListener('touchmove', function (ev) {
                 ev = ev || event;
                 let touchC = ev.changedTouches[0];
