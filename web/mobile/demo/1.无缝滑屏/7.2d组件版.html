@@ -88,7 +88,7 @@
 
         let imgArr = ['./img/1.jpg', './img/2.jpg', './img/3.jpg', './img/4.jpg', './img/5.jpg']
         let pointeLength = imgArr.length;
-
+        imgArr = imgArr.concat(imgArr);
         carouselLayout(imgArr);
 
         /** 布局
@@ -99,7 +99,9 @@
             let carouselWrap = document.querySelector('.carousel-wrap');
 
             if (carouselWrap) {
-                imgArr = imgArr.concat(imgArr);
+                // imgArr = imgArr.concat(imgArr);
+                // console.log('----------------imgarr-----------', imgArr.length);
+
 
                 let ulNode = document.createElement('ul');
                 // ulNode.setAttribute('class', 'list');
@@ -131,10 +133,10 @@
                     pUlNode.firstChild.classList.add("active");
                     pointWrap.appendChild(pUlNode);
                 }
+                carouselAction();
             }
 
         }
-        carouselAction();
         /** 滑屏
          * @description: 手指滑动屏幕，图片元素也跟着滑动
          *              1.拿到元素一开始的位置
@@ -144,7 +146,7 @@
          */
         function carouselAction() {
             let startX = 0; //手指一开始的位置
-            let elementX = 0; //手指一开始的位置
+            let elementX = 0; //元素一开始的位置
             let movedX = 0; // 手指移动的距离
             // let translateX = 0; // 元素偏移量，替代offsetLeft
             let carouselWrap = document.querySelector('.carousel-wrap');
@@ -161,11 +163,11 @@
                     点击第二组的最后一张瞬间跳到第一组的最后一张
                 */
                 // index 代表ul的位置
-
                 let index = transformCss(ulNode, 'translateX') / document.documentElement.clientWidth;
-                console.log('---------------index------------', index);
+                // console.log('---------------index------------', index);
                 if (-index === 0) {
                     index = -pointeLength;
+                    // console.log('---------------index == 0 ------------', index);
                 } else if (-index == (imgArr.length - 1)) {
                     index = -(pointeLength - 1)
                 }
@@ -174,17 +176,19 @@
 
                 startX = touchC.clientX;
                 elementX = transformCss(ulNode, 'translateX');
+                // console.log('-----start----', transformCss(ulNode, 'translateX'));
             })
             carouselWrap.addEventListener('touchmove', function (ev) {
                 ev = ev || event;
                 let touchC = ev.changedTouches[0];
                 let nowX = touchC.clientX;
                 // console.log(nowX);
-
                 movedX = nowX - startX;
+
                 // 元素移动手指移动的距离
                 // ulNode.style.left = elementX + movedX + 'px';
                 ulNode.style.transform = transformCss(ulNode, 'translateX', elementX + movedX)
+                // console.log('-----move----', transformCss(ulNode, 'translateX'));
             })
             carouselWrap.addEventListener('touchend', function (ev) {
                 ev = ev || event;
@@ -193,18 +197,13 @@
                 let index = transformCss(ulNode, 'translateX') / document.documentElement.clientWidth;
                 index = Math.round(index);
                 // console.log('round', index);
+                // console.log('end imgArr.length', imgArr.length);
 
                 if (index > 0) { // 右滑加载最后一屏
                     index = 0;
                 } else if (index < 1 - imgArr.length) { // 左滑最后一屏加载第一屏
                     index = 1 - imgArr.length;
                 }
-
-                ulNode.style.transition = '.3s transform';
-                // ulNode.style.left = index * (document.documentElement.clientWidth) + 'px';
-                ulNode.style.transform = transformCss(ulNode, 'translateX', index * (document
-                    .documentElement.clientWidth))
-                // ulNode.style.transform = 'translateX(' + translateX + 'px)';
 
                 let pointWrap = document.querySelector('.carousel-wrap > .point-wrap');
                 if (pointWrap) {
@@ -214,8 +213,16 @@
                         // console.log(li);
                         li.classList.remove('active');
                     }
-                    pUlNode.children[Math.abs(index)].classList.add('active');
+                    pUlNode.children[Math.abs(index % pointeLength)].classList.add('active');
                 }
+
+                ulNode.style.transition = '.3s transform';
+                // ulNode.style.left = index * (document.documentElement.clientWidth) + 'px';
+                ulNode.style.transform = transformCss(ulNode, 'translateX', index * (document
+                    .documentElement.clientWidth))
+                // ulNode.style.transform = 'translateX(' + translateX + 'px)';
+                // console.log('-----end----', transformCss(ulNode, 'translateX'));
+
             })
         }
 
