@@ -1,0 +1,60 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+/**
+ * @description:
+    一、计算 
+        1. 设计稿为750px 
+        2. 现在的一屏幕宽度定的为16rem
+        3. 假设设计稿上的像素为124px,则此时的值 124 / 750 * 16 = 2.6453333rem
+    ---------------------------------------------------
+    二、优化
+        1. 上术方案每次计算太过复杂
+        2. 如果定义 @rem =  750 / 16
+        3. 则： 124像素的元素为 124 / @rem
+*/
+#wrap {
+  height: 100%;
+  font-size: 16px;
+}
+#wrap .header {
+  margin: 0 0.64rem;
+  height: 100px;
+  line-height: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+#wrap .header .title {
+  background-color: pink;
+  font-family: PingFang SC;
+  color: #f0eff4;
+}
+#wrap .container {
+  margin: 15px 0.34133333rem 0;
+}
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.container .tip {
+  width: 14.72rem;
+  background-color: pink;
+  height: 163px;
+  border-radius: 0.32rem;
+}
+.container .tip .title {
+  font-size: 20px;
+  font-family: PingFang SC;
+  color: #333333;
+  height: 18.5px;
+}
+.container .tip .titleHr {
+  margin-top: 6.5px;
+}

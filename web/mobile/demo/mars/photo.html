@@ -7,36 +7,40 @@
         content="width=device-width,initial-scale=1.0, user-scalable=no, minimum-scale=1.0,maximum-scale=1.0">
     <!-- c ontent="width=device-width,height=device-height, initial-scale=1.0, user-scalable=no, minimum-scale=1.0,maximum-scale=1.0, target-densitydpi=device-dpi"> -->
     <title>Document</title>
-    <style>
-        html {
-            font-size: 16;
-        }
-
-        div {
-            width: 8rem;
-            height: 8rem;
-            background-color: pink;
-        }
-    </style>
+    <link rel="stylesheet" href="css/photo.css">
 </head>
 
 <body>
-    <div>
-        test
+    <div id="wrap">
+        <div class="header">
+            <div class="back">
+                >
+            </div>
+            <div class="title">
+                照片总览
+            </div>
+            <div class="action">
+                批量asdfasdf管理
+            </div>
+        </div>
+        <div class="container">
+            <div class="tip">
+                <div class="title">提示</div>
+                <hr class="titleHr">
+                <div class="message">你确定吗</div>
+                <hr class="bottomHr">
+                <div class="bottom">good</div>
+            </div>
+        </div>
     </div>
 </body>
 <script>
-    // rem适配原理：改变了一个元素在不同设备上占据的CSS像素的个数。
-    // 优点： 没有破坏完美视口。
-    // 缺点： px值到rem的转换太复杂
-    // 原理： 改变一个元素在不同设备上的css像素的个数。
     window.onload = function () {
-        document.addEventListener('touchstart', function (ev) {
-            ev = ev || enent;
-            ev.stopPropagation();
-        })
+        /*  document.addEventListener('touchstart', function (ev) {
+             ev = ev || enent;
+             ev.stopPropagation();
+         }) */
 
-        // 选择适配方案
         ;
         (function () {
             let styleNode = document.createElement('style');

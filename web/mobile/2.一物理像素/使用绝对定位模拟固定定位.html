@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, user-scalable=no, minimum-scale=1.0,maximum-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*  
+        不禁用系统滚动条，header的绝对定位是参照初始包含块，
+        滑动滚动条的时候初始包含块动了，所以header也会跟着动。
+        #wrap .header {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background-color: pink;
+        } */
+
+        html,
+        body {
+            height: 100% !important;
+            overflow: hidden;
+        }
+
+        #wrap {
+            height: 100%;
+            overflow: auto;
+        }
+
+        #wrap .header {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="header"></div>
+    </div>
+</body>
+
+<script>
+    window.onload = function () {
+        document.addEventListener('touchstart', function (ev) {
+            ev = ev || enent;
+            ev.stopPropagation();
+        })
+
+        // 选择适配方案
+        ;
+        (function () {
+            let styleNode = document.createElement('style');
+            let htmlFontSize = document.documentElement.clientWidth / 16;
+            styleNode.innerHTML += "html{font-size:" + htmlFontSize + "px !important;}";
+            document.head.appendChild(styleNode);
+        })();
+
+
+        ;
+        (function () {
+            for (let i = 0; i < 100; i++) {
+                wrap.innerHTML += 'aadasd <br/>'
+            }
+        })()
+
+    }
+</script>
+
+</html>
