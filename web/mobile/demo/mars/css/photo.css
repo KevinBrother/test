@@ -21,7 +21,6 @@ body {
 */
 #wrap {
   height: 100%;
-  font-size: 16px;
 }
 #wrap .header {
   margin: 0 0.64rem;
@@ -31,9 +30,17 @@ body {
   justify-content: space-between;
 }
 #wrap .header .title {
+  font-size: 0.68266667rem;
   background-color: pink;
   font-family: PingFang SC;
   color: #f0eff4;
+}
+#wrap .header .action {
+  font-size: 0.55466667rem;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #f0eff4;
+  background-color: pink;
 }
 #wrap .container {
   margin: 15px 0.34133333rem 0;

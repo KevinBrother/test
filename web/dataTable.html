@@ -1,148 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link href="datatable/css/jquery.dataTables.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <link href="datatable/css/jquery.dataTables.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        />
 
-    <script
-      type="text/javascript"
-      language="javascript"
-      src="//code.jquery.com/jquery-1.12.4.js"
-    ></script>
-    <script src="datatable/js/jquery.dataTables.min.js"></script>
-    <!-- <script src="datatable/js/dataTables.colReorder.min.js"></script> -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./mock/mock.js"></script>
-    <script src="./mock/mockData.js"></script>
-  </head>
-  <body>
-    <p>最小年纪<input id="min"></p>
-    <p>最大年纪<input id="max"></p>
-    <table id="table_id_example" class="table display">
-      <thead>
-        <td>姓名</td>
-        <td>年龄</td>
-        <td>操作</td>
-        <!--  <td>
+        <script
+            type="text/javascript"
+            language="javascript"
+            src="//code.jquery.com/jquery-1.12.4.js"
+        ></script>
+        <script src="datatable/js/jquery.dataTables.min.js"></script>
+        <!-- <script src="datatable/js/dataTables.colReorder.min.js"></script> -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"
+        ></script>
+        <script src="./mock/mock.js"></script>
+        <script src="./mock/mockData.js"></script>
+    </head>
+    <body>
+        <p>
+            最小年纪
+            <input id="min" />
+        </p>
+        <p>
+            最大年纪
+            <input id="max" />
+        </p>
+        <table id="table_id_example" class="table display">
+            <thead>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>操作</td>
+                <!--  <td>
             <button type="button" onclick="click(this)">点我</button>
         </td>  -->
-      </thead>
-    </table>
-  </body>
-  <script>
-    document.title='\u200E';
-    var columns = [
-      {
-        data: "name"
-      },
-      {
-        data: "age"
-      },
-      {
-        data: null,
-        render: function(data, type, full) {
-          var html = "<button type='button'>点我</button>";
-          return html;
-        }
-      }
-    ];
-
-    $(document).ready(function() {
-      $.fn.dataTable.ext.search.push(
-          function( settings, data, dataIndex ) {
-              var min = parseInt( $('#min').val(), 10 );
-              var max = parseInt( $('#max').val(), 10 );
-              var age = parseFloat( data[1] ) || 0; // use data for the age column
-      
-              if ( ( isNaN( min ) && isNaN( max ) ) ||
-                  ( isNaN( min ) && age <= max ) ||
-                  ( min <= age   && isNaN( max ) ) ||
-                  ( min <= age   && age <= max ) )
-              {
-                  return true;
-              }
-              return false;
-          }
-      );
-
-      var table = $("#table_id_example").DataTable({
-        // data: tabledata,
-        // colReorder: {
-        //   fixedColumnsLeft: 1
-        // },
-        columns: columns,
-        pagingType: "full_numbers",
-        language: {
-          url: "datatable/datatables_language.json"
-        },
-        ajax: function(data, callback, setting) {
-          console.log('data', data)
-          console.log('setting', setting)
-          let opt = "";
-          let url = "http://127.0.0.1:8080/result";
-
-          var rData = {};
-          getAjax(
-            opt,
-            url,
-            function(data) {
-              rData.recordsTotal = data.total;
-              rData.recordsFiltered = data.total;
-              rData.data = data.custs;
-            //   console.log(rData);
+            </thead>
+        </table>
+    </body>
+    <script>
+        document.title = "\u200E";
+        var columns = [
+            {
+                data: "name",
             },
-            function() {
-              callback(rData);
-            }
-          );
+            {
+                data: "age",
+            },
+            {
+                data: null,
+                render: function (data, type, full) {
+                    var html = "<button type='button'>点我</button>";
+                    return html;
+                },
+            },
+        ];
+
+        $(document).ready(function () {
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var min = parseInt($("#min").val(), 10);
+                var max = parseInt($("#max").val(), 10);
+                var age = parseFloat(data[1]) || 0; // use data for the age column
+
+                if (
+                    (isNaN(min) && isNaN(max)) ||
+                    (isNaN(min) && age <= max) ||
+                    (min <= age && isNaN(max)) ||
+                    (min <= age && age <= max)
+                ) {
+                    return true;
+                }
+                return false;
+            });
+
+            var table = $("#table_id_example").DataTable({
+                // data: tabledata,
+                // colReorder: {
+                //   fixedColumnsLeft: 1
+                // },
+                columns: columns,
+                pagingType: "full_numbers",
+                language: {
+                    url: "datatable/datatables_language.json",
+                },
+                ajax: function (data, callback, setting) {
+                    console.log("data", data);
+                    console.log("setting", setting);
+                    let opt = "";
+                    let url = "http://127.0.0.1:8080/result";
+
+                    var rData = {};
+                    getAjax(
+                        opt,
+                        url,
+                        function (data) {
+                            rData.recordsTotal = data.total;
+                            rData.recordsFiltered = data.total;
+                            rData.data = data.custs;
+                            //   console.log(rData);
+                        },
+                        function () {
+                            callback(rData);
+                        }
+                    );
+                },
+            });
+
+            $("#table_id_example tbody").on("click", "tr button", function () {
+                let data = table.cell($(this).parent()).data();
+                // console.log(data);
+            });
+
+            $("#table_id_example").on("page.dt", function () {
+                let info = table.page.info();
+                // console.log(info);
+            });
+
+            $("#min, #max").keyup(function () {
+                table.draw();
+            });
+        });
+        function getAjax(opt, url, succ, callback) {
+            $.ajax({
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    succ(data);
+                },
+            }).then(function () {
+                if (callback !== null && callback instanceof Function) {
+                    callback();
+                }
+            });
         }
-      });
-
-      
-      $("#table_id_example tbody").on("click", "tr button", function() {
-        let data = table.cell($(this).parent()).data();
-        // console.log(data);
-      });
-
-
-      $("#table_id_example").on("page.dt", function() {
-        let info = table.page.info()
-        // console.log(info);
-      });
-
-      $('#min, #max').keyup( function() {
-        table.draw();
-     } );
-
-
-    });
-    function getAjax(opt, url, succ, callback) {
-      $.ajax({
-        url: url,
-        dataType: "json",
-        success: function(data) {
-          succ(data);
-        }
-      }).then(function() {
-        if (callback !== null && callback instanceof Function) {
-          callback();
-        }
-      });
-    }
-  </script>
+    </script>
 </html>
 
 <!-- var table = $("#example").DataTable({

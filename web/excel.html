@@ -1,54 +1,58 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html>
-<head>  
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
-<title>Hello, World</title>  
-<style type="text/css">  
-html{height:100%}  
-body{height:100%;margin:0px;padding:0px}  
-#container{height:100%}  
-</style>  
-<script src="/js/jquery-1.11.2.js"></script>
-<script src="js/xlsx.core.min.js"></script>
-<script src="js/xlsx.full.min.js"></script>
-<script src="js/export2Excel.js"></script>
-</head>  
-
-<body>  
-
-<input type="file" name="" id="file" onchange="change(this)">
-
-<script type="text/javascript"> 
-
-function change(evn){
-    var name = event.target.files[0].name;//获取上传的文件名
-    var divObj= $(evn).prev()  //获取div的DOM对象
-    $(divObj).html(name) //插入文件名
-    var id = $(evn).attr('id');//获取id
-    var num = id.substr(4,1)
-    var file = event.target.files[0];
-    
-    readWorkbookFromLocalFile(file, function(data){
-        let sheet1 = data.Sheets.sheet1;
-        console.log(sheet1)
-
-        for(let key in sheet1) {
-            //  console.log(key);
-            // A列 且从A2开始
-            var patt1=new RegExp(/^A[2-9][0-9]*/);
-            if(patt1.test(key)) {
-                let addr = sheet1[key]["v"];
-                console.log(addr);
-
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Hello, World</title>
+        <style type="text/css">
+            html {
+                height: 100%;
             }
-        }
-    }) 
-}
+            body {
+                height: 100%;
+                margin: 0px;
+                padding: 0px;
+            }
+            #container {
+                height: 100%;
+            }
+        </style>
+        <script src="/js/jquery-1.11.2.js"></script>
+        <script src="js/xlsx.core.min.js"></script>
+        <script src="js/xlsx.full.min.js"></script>
+        <script src="js/export2Excel.js"></script>
+    </head>
 
+    <body>
+        <input type="file" name="" id="file" onchange="change(this)" />
 
-//导出案例
-/* var aoa = [
+        <script type="text/javascript">
+            function change(evn) {
+                var name = event.target.files[0].name; //获取上传的文件名
+                var divObj = $(evn).prev(); //获取div的DOM对象
+                $(divObj).html(name); //插入文件名
+                var id = $(evn).attr("id"); //获取id
+                var num = id.substr(4, 1);
+                var file = event.target.files[0];
+
+                readWorkbookFromLocalFile(file, function (data) {
+                    let sheet1 = data.Sheets.sheet1;
+                    console.log(sheet1);
+
+                    for (let key in sheet1) {
+                        //  console.log(key);
+                        // A列 且从A2开始
+                        var patt1 = new RegExp(/^A[2-9][0-9]*/);
+                        if (patt1.test(key)) {
+                            let addr = sheet1[key]["v"];
+                            console.log(addr);
+                        }
+                    }
+                });
+            }
+
+            //导出案例
+            /* var aoa = [
     ['主要信息', null, null, '其它信息'], // 特别注意合并的地方后面预留2个null
     ['姓名', '性别', '年龄', '注册时间'],
     ['张三', '男', 18, new Date()],
@@ -60,8 +64,6 @@ sheet['!merges'] = [
     {s: {r: 0, c: 0}, e: {r: 0, c: 2}}
 ];
 openDownloadDialog(sheet2blob(sheet), '单元格合并示例.xlsx'); */
-
-
-</script>  
-</body>  
+        </script>
+    </body>
 </html>
