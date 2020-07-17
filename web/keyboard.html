@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script
+            type="text/javascript"
+            language="javascript"
+            src="//code.jquery.com/jquery-1.12.4.js"
+        ></script>
+    </head>
+    <body>
+        <form action="" id="myform">
+            <input type="input" id="input" value="" placeholder="快速搜索" results="5" />
+        </form>
+        <script>
+            //方法一
+            $("#myform").on("keypress", function (e) {
+                var keycode = e.keyCode;
+                var searchName = $(this).val(); //keycode是键码，13也是电脑物理键盘的 enter
+                if (keycode == "13") {
+                    alert(2);
+                    e.preventDefault();
+                    //请求搜索接口
+                }
+            });
+            //方法二
+            //这两种都能用, 一个是在form上加id 一个是在input元素加id
+            //对于苹果手机添加一个form元素是必要的,否则只能实现功能但是键盘的文字不能变成搜索字样
+            $("#myform").bind("search", function () {
+                //coding
+                alert(1);
+            });
+            /*$('#input').bind('search', function () {
+
+                    alert(1);
+                });*/
+        </script>
+    </body>
+</html>

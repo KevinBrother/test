@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <style>
+            #wrap {
+                width: 400px;
+                background-color: pink;
+                margin: 0 auto;
+                text-align: center;
+                /* 父级高度不固定的时，高度只能通过内部文本来撑开。这样，我们可以通过设置内填充（padding）的值来使文本看起来垂直居中，只需设置padding-top和padding-bottom的值相等： */
+                padding: 30px 0px;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        #wrap {
-            width: 400px;
-            background-color: pink;
-            margin: 0 auto;
-            text-align: center;
-            /* 父级高度不固定的时，高度只能通过内部文本来撑开。这样，我们可以通过设置内填充（padding）的值来使文本看起来垂直居中，只需设置padding-top和padding-bottom的值相等： */
-            padding: 30px 0px;
-        }
+            #wrap .inner {
+                background-color: hotpink;
+            }
+        </style>
+    </head>
 
-        #wrap .inner {
-            background-color: hotpink;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="wrap">
-        <span class="inner">
-            asdfasdfaasdfasdfasdfasdssaddf <br />
-            asdfasdfaasdfasdfasdfasdssaddf <br />
-            asdfasdfaasdfasdfasdfasdssaddf <br />
-            asdfasdfaasdfasdfasdfasdssaddf <br />
-            asdfasdfaasdfasdfasdfasdssaddf <br />
-        </span>
-    </div>
-</body>
-
+    <body>
+        <div id="wrap">
+            <span class="inner">
+                asdfasdfaasdfasdfasdfasdssaddf
+                <br />
+                asdfasdfaasdfasdfasdfasdssaddf
+                <br />
+                asdfasdfaasdfasdfasdfasdssaddf
+                <br />
+                asdfasdfaasdfasdfasdfasdssaddf
+                <br />
+                asdfasdfaasdfasdfasdfasdssaddf
+                <br />
+            </span>
+        </div>
+    </body>
 </html>

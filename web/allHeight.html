@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .father {
+                margin: 50px auto;
+                width: 1000px;
+                height: 1500px;
+                background-color: darkcyan;
+                padding: 10px;
+                border: 10px solid salmon;
+                position: relative;
+            }
+            #view {
+                margin: 50px auto;
+                width: 800px;
+                height: 900px;
+                background-color: lightpink;
+                border: 10px solid skyblue;
+                padding: 20px;
+                font-size: 25px;
+            }
+            .test {
+                background-color: paleturquoise;
+                width: 1000px;
+                border: 10px solid skyblue;
+                padding: 10px;
+            }
+        </style>
+        <div class="father">
+            <div id="view">
+                <div style="width: 500px; overflow: scroll; margin: 20px auto; height: 200px;">
+                    <div class="test">
+                        <p>
+                            Happy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            YearHappy New YearHappy New YearHappy New YearHappy New YearHappy New
+                            Year
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // https://blog.csdn.net/weixin_43690348/article/details/103942950
+            var oneWidth = document.getElementById("view").clientWidth;
+            console.log("网页可见区域的宽" + oneWidth); //div的width+padding-width
+
+            var oneHeight = document.getElementById("view").clientHeight;
+            console.log("网页可见区域的高" + oneHeight); //div的height+padding-height
+
+            var oneTop = document.getElementById("view").clientTop;
+            console.log("clientTop-->" + oneTop); //div的border-top
+
+            var oneLeft = document.getElementById("view").clientLeft;
+            console.log("clientLeft-->" + oneLeft); //div的border-left
+
+            document.body.clientWidth; // 网页可见区域的宽 width + padding
+            document.body.clientHeight; // 同理
+            document.body.clientTop; // 该div上边框的高度
+            document.body.clientLeft; // 该div左边框的高度
+            // 解释：id="view"的div宽度为800px,padding为20px所以clientWidth=width+ （padding-width），高度同理可得。clientTop为该div的上边框的高度，clientLeft为div左边框的宽度。
+
+            document.body.offsetWidth; // (包括边线的宽); 即: clientWidth + border
+            document.body.offsetHeight; // (包括边线的宽);
+            document.body.offsetTop; //  当前元素上边框边缘到最近的"已定位"父级上边框内边缘的距离；即：已定位父元素的padding或者body顶部 + 当前元素的margin
+            document.body.offsetLeft;
+            //  解释：div的offsetWidth=width+border+padding，高度同理。
+            // 重点在于offsetTop，offsetTop：当前元素上边框边缘到最近的"已定位"父级上边框内边缘的距离。 如果父级都没有定位，则分别是到body顶部的距离。offsetLeft同理。看下图（此时父级已经定位）：
+
+            document.body.scrollWidth;
+            document.body.scrollHeight;
+            document.body.scrollTop;
+            document.body.scrollLeft;
+            // 解释：若正文内容没有超出div的可视区域外则scrollWidth的值=clientWidth的值，若超出则为正文内容的宽度包括div的宽和padding但不包括border,高度同理。
+            // 若正文元素不能被滚动，它的scrollTop将被设置为0，scrollTop这个属性在滑轮事件中用的比较多。
+        </script>
+    </body>
+</html>
