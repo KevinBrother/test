@@ -1,24 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <script src="js/vue.js"></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="app">
-        <input type="text" name="" id="" v-model="detail.cust.id" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+    .card {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    card {
+      justify-content: flex-start;
+      overflow: hidden;
+      cursor: pointer;
+
+      // 每逢三个元素，则执行动画，源代码和我们分析的动画的顺序相反，圆环是从长变短，不过不影响
+      .node {
+        border: solid 5px #F29338;
+        border-radius: 50%;
+
+
+        &:nth-child(3n) {
+          width: 40px;
+          flex-basis: 40px;
+          background: #F8C798;
+          animation: change-circle-width 2s ease alternate infinite;
+        }
+      }
+    }
+
+    @keyframes change-circle-width {
+      from {
+        width: 40px;
+        flex-basis: 40px;
+        background: #F8C798;
+      }
+
+      60% {
+        width: 20px;
+        flex-basis: 20px;
+        background: transparent;
+      }
+
+      // 动画 60% - 100% 这段时间，属性没有变动，所以图案看起来像是静止的。
+      to {
+        width: 20px;
+        flex-basis: 20px;
+        background: transparent;
+      }
+    }
+
+    z
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="card">
+      <div class="node" v-for="item in 100"></div>
     </div>
-    <script>
-        new Vue({
-            el: '#app',
-            data:{
-                detail:{
-                }
-            }
-        })    
-    </script>
-  </body>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        detail: {}
+      }
+    })
+  </script>
+</body>
+
 </html>
