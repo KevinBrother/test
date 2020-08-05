@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            #column {
+                column-count: 2;
+                column-gap: 30px;
+                column-rule: 1px solid black;
+            }
+            div:nth-child(1) {
+                background-color: white;
+            }
+            div:nth-child(2) {
+                background-color: pink;
+            }
+            div:nth-child(3) {
+                background-color: paleturquoise;
+            }
+            div:nth-child(4) {
+                background-color: rgb(167, 235, 135);
+            }
+            div:nth-child(2*n + 1) {
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="column">
+            <div>
+                --1-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus suscipit
+                aliquam commodi impedit ullam? Fugit provident repudiandae ullam officiis dolorem
+                veritatis ea at? Sequi perspiciatis voluptatibus sed praesentium sit mollitia.
+            </div>
+            <div>
+                --2-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam commodi
+                quibusdam architecto, debitis similique nisi quasi earum aliquid, obcaecati, nobis
+                sunt veniam dignissimos soluta voluptas optio quidem sint magni numquam.
+            </div>
+            <div>
+                --3-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur,
+                eligendi voluptas? Accusantium recusandae, incidunt neque commodi, vel fuga omnis
+                facere voluptatum, magni adipisci eius qui iste eligendi iure suscipit laudantium?
+            </div>
+            <div>
+                --4-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, ducimus
+                illum alias minima suscipit architecto nam cupiditate libero labore voluptatem eum,
+                est eligendi ea veniam, sit molestiae? Nemo, illo dolores!
+            </div>
+        </div>
+    </body>
+</html>

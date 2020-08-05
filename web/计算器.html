@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             * @param {string} s
+             * @return {number}
+             */
+            var calculate = function (s) {
+                // debugger;
+                let suffixExpre = getSuffixExpre(s);
+
+                // 二、运算、数字入栈
+                // 从左到右便利后缀表达式的每个字符和符号
+                // 如果是是数字就放入到栈中
+                // 如果是字符就去除最上面的两个数字进行运算，并把结果入栈，知道遍历完成。
+
+                let result = getResult(suffixExpre);
+            };
+
+            // 获取后缀表达式
+            function getSuffixExpre(s) {
+                let numArr = [];
+                let chatArr = [];
+                let newStr = "";
+                let stack = [];
+                let regNum = /^[0-9]+$/;
+                let regHight = /\*|\//;
+                let regLower = /\+|-/;
+
+                for (let str of s) {
+                    // 一、先转换为后缀表达式（去掉大括号），符号入栈 （后进先出）
+                    // 9+（3-1）* 3 + 10 / 2 =>  9 3 1 - 3 * + 10 2 / +
+                    // 从左到右遍历中缀表达式的每个字符和符号，若是数字就输出，作为后缀表达式的一部分。
+                    // 若是符号，则判断其与栈顶符号的优先级，是右括号或优先级低于栈顶符号，则栈顶元素依次出栈并输出，并将当前符号进栈。
+
+                    if (regNum.test(str)) {
+                        // 是数字
+                        newStr += str;
+                    } else {
+                        if (str === "(") {
+                            stack.push(str);
+                        } else if (str === ")") {
+                            // 右括号出栈直到左括号为止。
+                            let length = stack.length;
+                            for (let i = 0; i < length; i++) {
+                                while (stack[stack.length - 1] !== "(") {
+                                    newStr += stack.pop();
+                                }
+                                stack.pop();
+                                break;
+                            }
+                        } else if (stack.length > 0) {
+                            // 优先级低于栈顶符号，出栈，当前元素入栈
+                            let lastStackEle = stack[stack.length - 1];
+
+                            if (regHight.test(lastStackEle) && regLower.test(str)) {
+                                let length = stack.length;
+                                for (let i = 0; i < length; i++) {
+                                    newStr += stack.pop();
+                                }
+                                stack.push(str);
+                            } else {
+                                stack.push(str);
+                            }
+                        } else {
+                            stack.push(str);
+                        }
+                    }
+                }
+
+                let length = stack.length;
+                for (let i = 0; i < length; i++) {
+                    newStr += stack.pop();
+                }
+                console.log(newStr);
+                return newStr;
+            }
+
+            // 开始计算
+            function getResult(suffixExpre) {
+                // 二、运算、数字入栈
+                // 从左到右便利后缀表达式的每个字符和符号
+                // 如果是是数字就放入到栈中
+                // 如果是字符就去除最上面的两个数字进行运算，并把结果入栈，知道遍历完成。
+            }
+
+            // 把中缀表达式变为字符串
+            function string2Arr(str) {
+                // 9+（3-1）* 3 + 10 / 2
+            }
+        </script>
+    </body>
+</html>
