@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor 5 – Classic editor</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+</head>
+<body>
+<h1>Classic editor</h1>
+<div id="editor">
+    <p>This is some sample content.</p>
+</div>
+<script>
+    // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+    let CK = '';
+
+    function MyUploadAdapterPlugin( editor ) {
+        debugger
+        editor.plugins.get( 'CKFinderUploadAdapter' ).createUploadAdapter = function( loader ) {
+            // ...
+
+            console.log('---------------fileRepository加载成功-------------',loader)
+        };
+    }
+
+
+    ClassicEditor.builtinPlugins.map( plugin => console.log( plugin.pluginName)  );
+
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+            extraPlugins: [ MyUploadAdapterPlugin ],
+
+            console.log( editor );
+            CK = editor;
+            editor.setData( '<p>Some text.</p>' );
+
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+
+</script>
+</body>
+</html>

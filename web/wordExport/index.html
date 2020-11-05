@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-1.11.2.js"></script>
+    <script src="FileSaver.js"></script>
+    <script src="jquery.wordexport.js"></script>
+</head>
+<body>
+    <div id="main">
+        asdfasdf
+        <img width="400px" height="263" src="../images/banner@2x.png" alt="">
+        <img width="400px" height="263" src="https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg" alt="">
+    </div>
+    <button id="click">下载。。。。</button>
+    <script>
+        $("#click").on('click',function () {
+            $('#main').wordExport('abc')
+        })
+    </script>
+</body>
+</html>
